@@ -19,7 +19,6 @@ export type TabConfig = {
   label: string;
   hex: string;
   cssColor: string;
-  num: string;
   sub: string;
   icon: IconComponent;
   mascot: React.ComponentType<{ color: string }>;
@@ -31,7 +30,6 @@ export const TABS: readonly TabConfig[] = [
     label: "Aujourd'hui",
     hex: "#1B4FE5",
     cssColor: "var(--ch-observer)",
-    num: "01",
     sub: "Le journal du jour. Matin et soir, à ton rythme.",
     icon: IconSun,
     mascot: MonsterCurieux,
@@ -41,7 +39,6 @@ export const TABS: readonly TabConfig[] = [
     label: "Récap",
     hex: "#FF8AB8",
     cssColor: "var(--ch-emotions)",
-    num: "02",
     sub: "Sept jours, trois mois, une saison. Voir les motifs.",
     icon: IconCalendar,
     mascot: MonsterReflexif,
@@ -51,7 +48,6 @@ export const TABS: readonly TabConfig[] = [
     label: "Outils",
     hex: "#FF1F8F",
     cssColor: "var(--ch-attention)",
-    num: "03",
     sub: "Une question : où en es-tu maintenant ?",
     icon: IconSparkle,
     mascot: MonsterSurprise,
@@ -61,7 +57,6 @@ export const TABS: readonly TabConfig[] = [
     label: "Listes",
     hex: "#1FBF7A",
     cssColor: "var(--ch-controle)",
-    num: "04",
     sub: "Vider la tête. Respirer. La page se souvient.",
     icon: IconList,
     mascot: MonsterCalme,

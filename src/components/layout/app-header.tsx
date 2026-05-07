@@ -28,11 +28,6 @@ export function AppHeader({ tabId }: AppHeaderProps) {
         </div>
       </Link>
 
-      <div className="header-eyebrow">
-        <span>{tab.num}</span>
-        <span>·</span>
-        <span>{tab.label}</span>
-      </div>
       <h1 className="tab-title">{tab.label.toUpperCase()}</h1>
       <p className="tab-subtitle">{tab.sub}</p>
 
