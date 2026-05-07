@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Journal TDAH</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf7f2;
+  --warm: #f5efe6;
+  --ink: #2a2318;
+  --muted: #7a6e62;
+  --border: #ede7de;
+  --accent1: #7b9e87;
+  --accent2: #c4956a;
+  --accent3: #8fa8c8;
+  --accent4: #b8a9d4;
+  --accent5: #e8b86d;
+  --green-bg: #e8f0eb;
+  --blue-bg: #e8eef5;
+  --purple-bg: #f0ecf8;
+  --orange-bg: #fdf3e3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* TABS NAV */
+.tabs-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--cream);
+  border-bottom: 1.5px solid var(--border);
+  padding: 0 16px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  padding: 14px 14px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+  letter-spacing: .02em;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.on {
+  color: var(--ink);
+  border-bottom-color: var(--accent1);
+  font-weight: 500;
+}
+
+/* PAGES */
+.page { display: none; padding: 20px 16px 60px; max-width: 660px; margin: 0 auto; animation: fadeUp .35s ease; }
+.page.on { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+/* SECTION LABEL */
+.sl {
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 22px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sl::after { content:''; flex:1; height:1px; background:var(--border); }
+.sl:first-child { margin-top: 10px; }
+
+/* SECTION NUMBER */
+.snum {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  color: var(--accent1);
+  font-weight: 700;
+  min-width: 20px;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border: 1.5px solid var(--border);
+  transition: box-shadow .2s;
+}
+.card:hover { box-shadow: 0 6px 20px rgba(42,35,24,.06); }
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .ico { font-size: 18px; }
+.card-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+/* SCALE DOTS */
+.scale-wrap { margin: 10px 0 4px; }
+.scale-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.scale-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.dot:hover { border-color: var(--accent1); transform: scale(1.1); }
+.dot.on { border-color: transparent; }
+.dot-battery.on { background: linear-gradient(135deg, #7b9e87, #5c8570); }
+.dot-senso.on { background: linear-gradient(135deg, #8fa8c8, #6a88b0); }
+.dot-ener.on { background: linear-gradient(135deg, #c4956a, #a87550); }
+
+/* EMOTIONS GRID */
+.emo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 8px 0;
+}
+.emo-btn {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 6px 8px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  color: var(--ink);
+  transition: all .2s;
+  line-height: 1.3;
+}
+.emo-btn .eico { font-size: 22px; display: block; margin-bottom: 4px; }
+.emo-btn:hover { border-color: var(--accent1); background: var(--green-bg); }
+.emo-btn.on { border-color: var(--accent1); background: var(--green-bg); font-weight: 500; }
+
+/* TAGS / CHIPS */
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 8px 0 4px; }
+.chip {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  padding: 7px 13px;
+  border-radius: 30px;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all .2s;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.chip:hover { border-color: var(--accent2); }
+.chip.on { border-color: var(--accent2); background: #f5ece1; font-weight: 500; }
+.chip.on::before { content: '✓ '; font-size: 11px; color: var(--accent2); }
+.chip.on-green { border-color: var(--accent1); background: var(--green-bg); font-weight: 500; }
+.chip.on-green::before { content: '✓ '; font-size: 11px; color: var(--accent1); }
+.chip.on-blue { border-color: var(--accent3); background: var(--blue-bg); font-weight: 500; }
+.chip.on-blue::before { content: '✓ '; font-size: 11px; color: var(--accent3); }
+.chip.on-purple { border-color: var(--accent4); background: var(--purple-bg); font-weight: 500; }
+.chip.on-purple::before { content: '✓ '; font-size: 11px; color: var(--accent4); }
+
+/* CHECKLIST ITEMS */
+.checklist { display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all .2s;
+  font-size: 13px;
+  color: var(--ink);
+}
+.check-item:hover { border-color: var(--accent1); background: #f8fbf9; }
+.check-item.on { border-color: var(--accent1); background: var(--green-bg); font-weight: 500; }
+.check-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: all .2s;
+  background: white;
+}
+.check-item.on .check-box { background: var(--accent1); border-color: var(--accent1); color: white; }
+
+/* INPUTS */
+.field {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  background: white;
+  outline: none;
+  transition: border-color .2s;
+  margin-top: 7px;
+}
+.field:focus { border-color: var(--accent1); }
+.field::placeholder { color: #b0a898; }
+textarea.field { resize: none; line-height: 1.6; }
+
+/* SLEEP TOGGLE */
+.sleep-row { display: flex; gap: 8px; margin: 6px 0; flex-wrap: wrap; }
+.sleep-opt {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  font-size: 12px;
+  cursor: pointer;
+  background: white;
+  color: var(--ink);
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.sleep-opt:hover { border-color: var(--accent3); }
+.sleep-opt.on { border-color: var(--accent3); background: var(--blue-bg); font-weight: 500; }
+
+/* PRIORITY ROWS */
+.prio-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 7px 0;
+}
+.prio-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 10px;
+  min-width: 80px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-top: 8px;
+  font-family: 'DM Sans', sans-serif;
+}
+.prio-ui { background: #e07a5f; }
+.prio-u  { background: var(--accent5); color: var(--ink); }
+.prio-i  { background: var(--accent3); }
+
+/* PROGRESS DOTS (3) */
+.prog3 { display: flex; gap: 6px; align-items: center; margin-top: 6px; }
+.prog3-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: all .15s;
+  background: white;
+}
+.prog3-dot.on { border-color: transparent; color: white; font-size: 13px; }
+.prog3-dot.p0.on { background: #e07a5f; }
+.prog3-dot.p1.on { background: var(--accent5); color: var(--ink); }
+.prog3-dot.p2.on { background: var(--accent1); }
+.prog3-label { font-size: 10px; color: var(--muted); margin-left: 2px; }
+
+/* WEEKDAYS */
+.weekdays { display: flex; gap: 7px; margin: 8px 0; }
+.wday {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  transition: all .15s;
+  background: white;
+}
+.wday:hover { border-color: var(--accent1); }
+.wday.on { background: var(--accent1); color: white; border-color: var(--accent1); }
+
+/* TABLE BILAN */
+.bilan-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.bilan-table th {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.bilan-table th:first-child { text-align: left; }
+.bilan-table td {
+  padding: 9px 4px;
+  border-bottom: 1px solid #f5f0ea;
+  font-size: 12.5px;
+  color: var(--ink);
+  vertical-align: middle;
+}
+.bilan-table tr:last-child td { border-bottom: none; }
+.bilan-table td:first-child { font-size: 12px; color: #4a433b; padding-right: 8px; }
+.bilan-table td:not(:first-child) { text-align: center; }
+.bilan-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all .15s;
+  background: white;
+}
+.bilan-radio:hover { border-color: var(--accent1); }
+.bilan-radio.on-ok { background: var(--green-bg); border-color: var(--accent1); }
+.bilan-radio.on-ko { background: #fce8e8; border-color: #c47b7b; }
+.bilan-note { font-size: 11px; width: 90px; border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; font-family: 'DM Sans', sans-serif; color: var(--ink); background: white; outline: none; }
+.bilan-note:focus { border-color: var(--accent1); }
+
+/* LINK HINT */
+.hint-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--accent3);
+  text-decoration: none;
+  margin-top: 8px;
+  font-weight: 500;
+  border-bottom: 1px dashed var(--accent3);
+  padding-bottom: 1px;
+  transition: color .2s;
+}
+.hint-link:hover { color: var(--accent1); }
+
+/* COMPARISON BOX */
+.compare-box {
+  background: var(--orange-bg);
+  border: 1px solid #f0d9b5;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #5a4a2a;
+  margin-top: 10px;
+  display: none;
+}
+
+/* TEXTAREA FREE */
+.free-area {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  background: white;
+  resize: none;
+  outline: none;
+  min-height: 120px;
+  transition: border-color .2s;
+  line-height: 1.65;
+}
+.free-area:focus { border-color: var(--accent1); }
+.free-area::placeholder { color: #b0a898; }
+
+/* PILL BADGE */
+.badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 10px;
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+.badge-g { background: var(--green-bg); color: #2e6645; }
+.badge-b { background: var(--blue-bg); color: #3a5f80; }
+.badge-o { background: var(--orange-bg); color: #7a5020; }
+.badge-p { background: var(--purple-bg); color: #5a4878; }
+
+/* HIGHLIGHT NOTE */
+.hl {
+  background: linear-gradient(135deg, #f0f5f2, #faf7f2);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #4a5e52;
+  line-height: 1.6;
+  margin-top: 10px;
+  border: 1px solid #dce8e0;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+}
+
+/* PILLAR BUTTONS */
+.pillar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin: 8px 0; }
+.pillar-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  padding: 13px 8px 11px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all .2s;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.pillar-btn .pico { font-size: 22px; display: block; margin-bottom: 5px; }
+.pillar-btn:hover { border-color: var(--accent1); background: var(--green-bg); }
+.pillar-btn.on { border-color: var(--accent1); background: var(--green-bg); font-weight: 500; }
+.pillar-btn.on::after { content: ' ✓'; }
+
+/* LISTES PAGE */
+.list-section { margin-bottom: 20px; }
+.list-title {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.list-item-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.list-item-row .check-box { cursor: pointer; }
+.list-item-row input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 4px 0;
+  outline: none;
+}
+.list-item-row input:focus { border-bottom-color: var(--accent1); }
+.list-add-btn {
+  font-size: 12px;
+  color: var(--accent1);
+  cursor: pointer;
+  background: none;
+  border: 1px dashed var(--accent1);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+  margin-top: 5px;
+}
+.list-add-btn:hover { background: var(--green-bg); }
+
+/* RESPONSIVE */
+@media (max-width: 400px) {
+  .emo-grid { grid-template-columns: repeat(2,1fr); }
+  .bilan-note { width: 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="tabs-nav">
+  <button class="tab-btn on" onclick="showTab('matin',this)">☀️ Matin</button>
+  <button class="tab-btn" onclick="showTab('soir',this)">🌙 Soir</button>
+  <button class="tab-btn" onclick="showTab('semaine',this)">📅 Semaine</button>
+  <button class="tab-btn" onclick="showTab('boussole',this)">🧭 Boussole</button>
+  <button class="tab-btn" onclick="showTab('pensees',this)">💭 Pensées</button>
+  <button class="tab-btn" onclick="showTab('listes',this)">📋 Listes</button>
+</nav>
+
+<!-- ======= MATIN ======= -->
+<div class="page on" id="tab-matin">
+
+  <!-- 1. Météo intérieure -->
+  <div class="sl"><span class="snum">1</span> Ma météo intérieure</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ico">🔋</span> Énergie</div>
+    <div class="scale-wrap">
+      <div class="scale-label-row"><span>Vide</span><span>Plein·e</span></div>
+      <div class="scale-dots" id="bat-m"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">• Humeur / état émotionnel</div>
+    <div class="card-sub">Plusieurs choix possibles</div>
+    <div class="emo-grid">
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😌</span>Serein·e</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😊</span>Bien</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😐</span>Neutre</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😤</span>Agité·e</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😰</span>Stressé·e / anxieux·se</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😢</span>Triste</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😡</span>En colère</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">🤯</span>Débordé·e</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">🤢</span>Dégoûté·e</button>
+    </div>
+    <input class="field" placeholder="Autre : préciser…" id="emo-autre-m">
+    <a href="https://symbiosepsychologie.podia.com/03-reguler-son-impulsivite-ses-emotions" target="_blank" class="hint-link">↗ Pour aller plus loin : réguler ses émotions</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">• Mon sommeil</div>
+    <div style="margin-bottom:8px">
+      <div class="card-sub" style="margin-bottom:4px">Qualité</div>
+      <div class="sleep-row" id="sleep-qual">
+        <button class="sleep-opt" onclick="togSleep('sleep-qual',this)">😴 Bonne</button>
+        <button class="sleep-opt" onclick="togSleep('sleep-qual',this)">😵 Mauvaise</button>
+      </div>
+    </div>
+    <div>
+      <div class="card-sub" style="margin-bottom:4px">Quantité</div>
+      <div class="sleep-row" id="sleep-qte">
+        <button class="sleep-opt" onclick="togSleep('sleep-qte',this)">✅ Suffisante</button>
+        <button class="sleep-opt" onclick="togSleep('sleep-qte',this)">⚠️ Insuffisante</button>
+      </div>
+    </div>
+    <a href="https://www.crehpsy-pl.fr/wp-content/uploads/2021/05/Vigi_Fiche-07-sommeil-V01_05-18.pdf" target="_blank" class="hint-link">↗ Prendre soin de mon sommeil</a>
+  </div>
+
+  <!-- 2. Mon corps -->
+  <div class="sl"><span class="snum">2</span> Mon corps</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ico">👁️</span> Mes sens</div>
+    <div class="card-sub">Je me sens…</div>
+    <div class="scale-wrap">
+      <div class="scale-label-row"><span>Sous-stimulé·e</span><span>Sur-stimulé·e</span></div>
+      <div class="scale-dots" id="senso-m"></div>
+    </div>
+    <a href="https://www.hoptoys.fr/produits-dematerialises-gratuits/j-explore-mon-profil-sensoriel-p-16055.html" target="_blank" class="hint-link">↗ J'explore mon profil sensoriel</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ico">✅</span> Ma routine du matin</div>
+    <div class="checklist" id="routine-m">
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>💊 Traitement(s)</span></div>
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>🍳 Déjeuner</span></div>
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>💧 Boire</span></div>
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>🪥 Toilette, dents…</span></div>
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>🏃 Exercice physique</span></div>
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>🌿 Activité extérieure</span></div>
+    </div>
+    <input class="field" placeholder="Autre : préciser…">
+  </div>
+
+  <!-- 3. Priorités -->
+  <div class="sl"><span class="snum">3</span> Mes 3 priorités du jour</div>
+
+  <div class="card">
+    <div class="prio-row">
+      <span class="prio-label prio-ui">🔴 Urgent<br>+ Important</span>
+      <input class="field" id="prio-ui" placeholder="La priorité absolue…" style="flex:1; margin-top:0">
+    </div>
+    <div class="prio-row" style="margin-top:8px">
+      <span class="prio-label prio-u">🟡 Urgent</span>
+      <input class="field" id="prio-u" placeholder="À faire aujourd'hui…" style="flex:1; margin-top:0">
+    </div>
+    <div class="prio-row" style="margin-top:8px">
+      <span class="prio-label prio-i">🔵 Important</span>
+      <input class="field" id="prio-i" placeholder="À planifier…" style="flex:1; margin-top:0">
+    </div>
+  </div>
+
+  <!-- 4. Pilier -->
+  <div class="sl"><span class="snum">4</span> Mon pilier à cultiver</div>
+
+  <div class="card">
+    <div class="card-sub">Qu'est-ce que je prévois de cultiver aujourd'hui ?</div>
+    <div class="pillar-grid">
+      <button class="pillar-btn" onclick="togPillar(this)"><span class="pico">📚</span>Apprendre</button>
+      <button class="pillar-btn" onclick="togPillar(this)"><span class="pico">🏃</span>Bouger</button>
+      <button class="pillar-btn" onclick="togPillar(this)"><span class="pico">🎨</span>Créer</button>
+    </div>
+  </div>
+
+  <!-- 5. Besoins -->
+  <div class="sl"><span class="snum">5</span> Aujourd'hui j'ai besoin de…</div>
+
+  <div class="card">
+    <div class="chips" id="besoins-m">
+      <button class="chip" onclick="togChip(this,'on')">🤫 Calme</button>
+      <button class="chip" onclick="togChip(this,'on')">🤝 Connexion / échanges</button>
+      <button class="chip" onclick="togChip(this,'on')">🏃 Mouvement</button>
+      <button class="chip" onclick="togChip(this,'on')">📋 Structure</button>
+      <button class="chip" onclick="togChip(this,'on')">🛡️ Sécurité</button>
+      <button class="chip" onclick="togChip(this,'on')">🎨 Expression / création</button>
+      <button class="chip" onclick="togChip(this,'on')">⚡ Stimulation</button>
+      <button class="chip" onclick="togChip(this,'on')">🌬️ Liberté</button>
+    </div>
+    <input class="field" placeholder="Autre : préciser…">
+    <a href="https://ekladata.com/P8BnMd3Jz3GSwexQJbaL3SOu8sQ.jpg" target="_blank" class="hint-link">↗ La ronde des besoins</a>
+  </div>
+
+</div>
+
+<!-- ======= SOIR ======= -->
+<div class="page" id="tab-soir">
+
+  <!-- 1. Météo du soir -->
+  <div class="sl"><span class="snum">1</span> Ma météo du soir</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ico">🔋</span> Énergie</div>
+    <div class="scale-wrap">
+      <div class="scale-label-row"><span>Vidé·e</span><span>Plein·e</span></div>
+      <div class="scale-dots" id="bat-s"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">• Humeur / état émotionnel</div>
+    <div class="emo-grid">
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😌</span>Serein·e</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😊</span>Bien</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😐</span>Neutre</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😤</span>Agité·e</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😰</span>Stressé·e / anxieux·se</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😢</span>Triste</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">😡</span>En colère</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">🤯</span>Débordé·e</button>
+      <button class="emo-btn" onclick="togEmo(this)"><span class="eico">🤢</span>Dégoûté·e</button>
+    </div>
+    <input class="field" placeholder="Autre : préciser…" id="emo-autre-s">
+    <div class="compare-box" id="compare-box">
+      <strong>↕ Comparaison matin / soir :</strong> <span id="compare-text"></span>
+    </div>
+  </div>
+
+  <!-- 2. Mes sens -->
+  <div class="sl"><span class="snum">2</span> Mes sens</div>
+
+  <div class="card">
+    <div class="checklist">
+      <div class="check-item" id="senso-ok" onclick="togSensoOk(this)"><div class="check-box"></div><span>✅ Une bonne journée, peu d'envahissement</span></div>
+    </div>
+    <div id="senso-detail" style="margin-top:8px">
+      <div class="card-sub">Des difficultés à traiter certains stimuli :</div>
+      <div style="margin-bottom:6px"><span style="font-size:12px;color:var(--muted);font-weight:500">🔊 Sons</span><input class="field" placeholder="Détailler…" style="margin-top:4px"></div>
+      <div style="margin-bottom:6px"><span style="font-size:12px;color:var(--muted);font-weight:500">👀 Mouvements</span><input class="field" placeholder="Détailler…" style="margin-top:4px"></div>
+      <div style="margin-bottom:6px"><span style="font-size:12px;color:var(--muted);font-weight:500">💡 Lumière</span><input class="field" placeholder="Détailler…" style="margin-top:4px"></div>
+      <div style="margin-bottom:6px"><span style="font-size:12px;color:var(--muted);font-weight:500">⚡ Imprévus</span><input class="field" placeholder="Détailler…" style="margin-top:4px"></div>
+      <div style="margin-bottom:6px"><span style="font-size:12px;color:var(--muted);font-weight:500">➕ Autre</span><input class="field" placeholder="Préciser…" style="margin-top:4px"></div>
+      <div><span style="font-size:12px;color:var(--muted);font-weight:500">💡 Ce que je peux modifier / mettre en place</span><input class="field" placeholder="Adapter mon environnement…" style="margin-top:4px"></div>
+    </div>
+    <a href="https://www.hoptoys.fr/produits-dematerialises-gratuits/j-explore-mon-profil-sensoriel-p-16055.html" target="_blank" class="hint-link">↗ Exemples d'adaptations de l'environnement</a>
+  </div>
+
+  <!-- 3. Tâches -->
+  <div class="sl"><span class="snum">3</span> Tâches prioritaires réalisées</div>
+
+  <div class="card">
+    <div class="card-sub">Pas commencé → En cours → Accompli</div>
+    <div style="margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="prio-label prio-ui" style="min-width:70px;font-size:10px;margin-top:0">🔴 Urg+Imp</span>
+        <span id="prio-ui-s" style="font-size:12px;color:var(--muted);font-style:italic;flex:1">—</span>
+      </div>
+      <div class="prog3" id="prog-ui">
+        <div class="prog3-dot p0" onclick="cycleP('prog-ui',0)" title="Pas commencé">○</div>
+        <div class="prog3-dot p1" onclick="cycleP('prog-ui',1)" title="En cours">…</div>
+        <div class="prog3-dot p2" onclick="cycleP('prog-ui',2)" title="Accompli">✓</div>
+        <span class="prog3-label">Pas commencé · En cours · Accompli</span>
+      </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="prio-label prio-u" style="min-width:70px;font-size:10px;margin-top:0">🟡 Urgent</span>
+        <span id="prio-u-s" style="font-size:12px;color:var(--muted);font-style:italic;flex:1">—</span>
+      </div>
+      <div class="prog3" id="prog-u">
+        <div class="prog3-dot p0" onclick="cycleP('prog-u',0)" title="Pas commencé">○</div>
+        <div class="prog3-dot p1" onclick="cycleP('prog-u',1)" title="En cours">…</div>
+        <div class="prog3-dot p2" onclick="cycleP('prog-u',2)" title="Accompli">✓</div>
+        <span class="prog3-label">Pas commencé · En cours · Accompli</span>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="prio-label prio-i" style="min-width:70px;font-size:10px;margin-top:0">🔵 Important</span>
+        <span id="prio-i-s" style="font-size:12px;color:var(--muted);font-style:italic;flex:1">—</span>
+      </div>
+      <div class="prog3" id="prog-i">
+        <div class="prog3-dot p0" onclick="cycleP('prog-i',0)" title="Pas commencé">○</div>
+        <div class="prog3-dot p1" onclick="cycleP('prog-i',1)" title="En cours">…</div>
+        <div class="prog3-dot p2" onclick="cycleP('prog-i',2)" title="Accompli">✓</div>
+        <span class="prog3-label">Pas commencé · En cours · Accompli</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Mon attention -->
+  <div class="sl"><span class="snum">4</span> Mon attention</div>
+
+  <div class="card">
+    <div class="card-sub">Pauses appliquées ?</div>
+    <div class="checklist">
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>⏱️ Pauses de 5 mn après chaque temps d'activité cognitive</span></div>
+      <div class="check-item" onclick="togCheck(this)"><div class="check-box"></div><span>⏸️ Pause longue (15–30 mn) tous les 4 cycles</span></div>
+    </div>
+    <a href="https://symbiosepsychologie.podia.com/06-s-organiser-gerer-son-temps" target="_blank" class="hint-link" style="margin-right:10px">↗ Mesurer ma capacité attentionnelle</a>
+    <a href="https://typikatypik54.fr/la-technique-pomodoro-un-outil-simple-et-efficace" target="_blank" class="hint-link">↗ Technique Pomodoro</a>
+    <div class="card-sub" style="margin-top:12px;margin-bottom:6px">Distracteurs repérés</div>
+    <div class="chips">
+      <button class="chip" onclick="togChip(this,'on')">📱 Notifications</button>
+      <button class="chip" onclick="togChip(this,'on')">🔊 Bruits</button>
+      <button class="chip" onclick="togChip(this,'on')">👀 Mouvements extérieurs</button>
+      <button class="chip" onclick="togChip(this,'on')">🖼️ Objets / images</button>
+      <button class="chip" onclick="togChip(this,'on')">💭 Mes propres pensées</button>
+    </div>
+    <input class="field" placeholder="Autre distracteur…">
+  </div>
+
+  <!-- 5. Apprentissages -->
+  <div class="sl"><span class="snum">5</span> Apprentissages du jour</div>
+
+  <div class="card">
+    <div class="card-sub">Données, pas verdicts.</div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500">Ce qui n'a pas fonctionné</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">Ce que ça m'a appris</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">Comment je pourrais faire la prochaine fois</label>
+    <input class="field" placeholder="…">
+    <div class="hl">L'oscillation n'est pas une défaillance. C'est la façon dont le vivant reste capable de s'adapter.</div>
+  </div>
+
+  <!-- 6. Gratitude -->
+  <div class="sl"><span class="snum">6</span> Gratitude et victoires</div>
+
+  <div class="card">
+    <div class="card-sub">Aujourd'hui…</div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500">🏆 J'ai réussi à</label>
+    <input class="field" placeholder="Même minuscule…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">🌸 J'ai apprécié</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">🙏 J'ai remercié / pour</label>
+    <input class="field" placeholder="…">
+    <input class="field" placeholder="Autre…" style="margin-top:10px">
+  </div>
+
+  <!-- 7. Routine du soir -->
+  <div class="sl"><span class="snum">7</span> Ma routine du soir</div>
+
+  <div class="card">
+    <textarea class="free-area" rows="4" placeholder="Ce que je mets en place avant de dormir…"></textarea>
+  </div>
+
+</div>
+
+<!-- ======= SEMAINE ======= -->
+<div class="page" id="tab-semaine">
+
+  <!-- 1. Bilan fonctionnel -->
+  <div class="sl"><span class="snum">1</span> Bilan fonctionnel</div>
+
+  <div class="card">
+    <table class="bilan-table">
+      <thead>
+        <tr>
+          <th>Domaine</th>
+          <th>😊</th>
+          <th>😕</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="bilan-body"></tbody>
+    </table>
+  </div>
+
+  <!-- 2. Patterns -->
+  <div class="sl"><span class="snum">2</span> Patterns observés</div>
+
+  <div class="card">
+    <div class="chips">
+      <button class="chip" onclick="togChip(this,'on-green')">🌅 Plus disponible le matin</button>
+      <button class="chip" onclick="togChip(this,'on-green')">🌆 Moins disponible l'après-midi</button>
+      <button class="chip" onclick="togChip(this,'on-green')">💊 Traitement efficace</button>
+      <button class="chip" onclick="togChip(this,'on-green')">🏃 Bouger aide à se remobiliser</button>
+      <button class="chip" onclick="togChip(this,'on-green')">⏸️ Les pauses sont utiles</button>
+      <button class="chip" onclick="togChip(this,'on-green')">👥 Fatigue sociale</button>
+      <button class="chip" onclick="togChip(this,'on-green')">🔥 Périodes d'hyperfocus</button>
+      <button class="chip" onclick="togChip(this,'on-green')">📖 Apprentissage par l'erreur</button>
+    </div>
+    <input class="field" placeholder="Autre pattern observé…">
+    <textarea class="free-area" rows="2" placeholder="Notes…" style="margin-top:8px;min-height:60px"></textarea>
+  </div>
+
+  <!-- 3. Réussites -->
+  <div class="sl"><span class="snum">3</span> Réussites</div>
+
+  <div class="card">
+    <label style="font-size:12px;color:var(--muted);font-weight:500">💡 Ce que j'ai appris</label>
+    <textarea class="free-area" rows="2" placeholder="…" style="min-height:60px"></textarea>
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">🏆 Victoire(s)</label>
+    <textarea class="free-area" rows="2" placeholder="…" style="min-height:60px"></textarea>
+  </div>
+
+  <!-- 4. Points d'amélioration -->
+  <div class="sl"><span class="snum">4</span> Points d'amélioration</div>
+
+  <div class="card">
+    <label style="font-size:12px;color:var(--muted);font-weight:500">Ce qui coince encore</label>
+    <textarea class="free-area" rows="2" placeholder="…" style="min-height:60px"></textarea>
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">Des pistes pour faire autrement / changer de regard</label>
+    <textarea class="free-area" rows="2" placeholder="…" style="min-height:60px"></textarea>
+  </div>
+
+  <!-- 5. Semaine prochaine -->
+  <div class="sl"><span class="snum">5</span> La semaine prochaine</div>
+
+  <div class="card">
+    <div class="card-sub">Un seul ajustement. Pas une liste.</div>
+    <textarea class="free-area" rows="2" placeholder="J'aimerais tester…" style="min-height:60px"></textarea>
+  </div>
+
+</div>
+
+<!-- ======= BOUSSOLE ======= -->
+<div class="page" id="tab-boussole">
+
+  <div class="hl" style="margin-bottom:16px;margin-top:10px">À compléter une seule fois, puis revisiter. C'est ta carte personnelle.</div>
+
+  <!-- 1. Attention -->
+  <div class="sl"><span class="snum">1</span> Mon attention</div>
+
+  <div class="card">
+    <div class="card-title">⏱️ Ma capacité attentionnelle</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+      <input class="field" placeholder="… minutes" style="max-width:120px;margin-top:0">
+      <span style="font-size:12px;color:var(--muted)">avant de décrocher</span>
+    </div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:12px">Mes stratégies de réduction des distractions</label>
+    <textarea class="free-area" rows="2" placeholder="Ce qui m'aide à rester concentré·e…" style="min-height:60px"></textarea>
+    <a href="https://symbiosepsychologie.podia.com/06-s-organiser-gerer-son-temps" target="_blank" class="hint-link">↗ Mesurer ma capacité attentionnelle</a>
+  </div>
+
+  <!-- 2. Motivation -->
+  <div class="sl"><span class="snum">2</span> Ma motivation</div>
+
+  <div class="card">
+    <div class="card-title">🧭 Mes valeurs — des directions</div>
+    <div class="card-sub">J'aimerais cultiver…</div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500">Dans mes relations</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">Dans mon travail</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">Pour ma santé physique, mon corps</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">Pour mon bien-être, mon développement</label>
+    <input class="field" placeholder="…">
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎁 Mes récompenses</div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500">⚡ Immédiates — après un effort court</label>
+    <input class="field" placeholder="ex : café, vidéo 5 min…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">⏸️ Courtes — après 4 cycles d'activité</label>
+    <input class="field" placeholder="ex : marche, musique…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">📅 Programmées — fin de journée / semaine</label>
+    <input class="field" placeholder="ex : série, sortie…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">🏅 Symboliques — fin de projet</label>
+    <input class="field" placeholder="ex : célébrer avec quelqu'un…">
+    <a href="https://symbiosepsychologie.podia.com/view/courses/guide-interactif-apprivoiser-son-tdah/3431850-rubrique-5-trouver-la-motivation-et-passer-a-l-action/11195263-video-outils-05" target="_blank" class="hint-link">↗ Liste de récompenses (vidéo)</a>
+  </div>
+
+  <!-- 3. Mon fonctionnement -->
+  <div class="sl"><span class="snum">3</span> Apprivoiser mon fonctionnement</div>
+
+  <div class="card">
+    <div class="card-title">💎 Mes forces et qualités</div>
+    <textarea class="free-area" rows="3" placeholder="Ce que je fais bien, ce qui me caractérise positivement…"></textarea>
+    <a href="https://www.tdah-france.fr/Les-qualites-des-personnes-avec-TDAH.html" target="_blank" class="hint-link">↗ Les qualités des personnes avec TDAH</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌱 Les conditions qui me sont favorables</div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500">🏠 Contexte / lieu</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">⏰ Moment / rythme</label>
+    <input class="field" placeholder="…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">👥 Relations</label>
+    <input class="field" placeholder="…">
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔋 Mes 3 piliers — banque d'activités ressourçantes</div>
+    <label style="font-size:12px;color:var(--muted);font-weight:500">📚 Apprendre</label>
+    <input class="field" placeholder="Activités qui me stimulent intellectuellement…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">🏃 Bouger</label>
+    <input class="field" placeholder="Activités physiques qui me font du bien…">
+    <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-top:10px">🎨 Créer</label>
+    <input class="field" placeholder="Activités créatives, expressives…">
+    <a href="https://igorthiriez.com/portfolio/liste-dactivites" target="_blank" class="hint-link">↗ Liste d'activités ressourçantes</a>
+  </div>
+
+  <!-- 4. Mantras -->
+  <div class="sl"><span class="snum">4</span> Mes phrases-mantras</div>
+
+  <div class="card">
+    <div class="card-sub">À me rappeler dans les moments difficiles</div>
+    <input class="field" placeholder="Phrase 1…">
+    <input class="field" placeholder="Phrase 2…" style="margin-top:8px">
+    <input class="field" placeholder="Phrase 3…" style="margin-top:8px">
+  </div>
+
+  <!-- 5. Suivi -->
+  <div class="sl"><span class="snum">5</span> Suivre mon évolution</div>
+
+  <div class="card">
+    <div class="card-sub">Des échelles validées pour mesurer mes symptômes et mes progrès.</div>
+    <a href="https://evaluation.symbiose-psychologie.fr" target="_blank" class="hint-link">↗ Échelles d'autoévaluation en ligne</a>
+  </div>
+
+</div>
+
+<!-- ======= PENSÉES ======= -->
+<div class="page" id="tab-pensees">
+
+  <div class="sl" style="margin-top:10px">J'externalise · je décharge · je désencombre ma mémoire de travail</div>
+
+  <div class="card">
+    <div class="card-title">💭 Espace libre</div>
+    <div class="card-sub">Idées, intuitions, à faire, ce qui traîne, ce qui germe… Tout peut atterrir ici.</div>
+    <textarea class="free-area" id="pensees-area" rows="18" placeholder="Je décharge ici sans filtre…" style="min-height:350px"></textarea>
+  </div>
+
+  <div class="card" style="background:var(--warm)">
+    <div class="card-title" style="font-size:13px">💡 À quoi sert cet espace ?</div>
+    <p style="font-size:12px;color:#5a4a38;line-height:1.7;margin-top:6px">
+      La mémoire de travail est limitée. Quand le cerveau essaie de retenir trop de choses, il perd en disponibilité pour la tâche en cours. 
+      Externaliser une idée (même fugace), c'est dire à son cerveau : <em>« C'est noté, tu peux lâcher. »</em>
+    </p>
+  </div>
+
+</div>
+
+<!-- ======= LISTES ======= -->
+<div class="page" id="tab-listes">
+
+  <div class="sl" style="margin-top:10px">Mes listes permanentes — elles ne s'effacent pas</div>
+
+  <div id="listes-container">
+    <!-- listes générées par JS -->
+  </div>
+
+  <button class="list-add-btn" onclick="addList()" style="margin-top:4px;display:block">+ Créer une nouvelle liste</button>
+
+</div>
+
+<script>
+// ===== TABS =====
+function showTab(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+  if (id === 'soir') syncPrios();
+}
+
+// ===== SCALE DOTS =====
+function makeDots(containerId, n, cls, color) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  for (let i = 0; i < n; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot ' + cls;
+    d.dataset.idx = i;
+    d.onclick = () => rateDots(containerId, i, cls, color);
+    c.appendChild(d);
+  }
+}
+function rateDots(id, idx, cls, color) {
+  const dots = document.querySelectorAll('#' + id + ' .dot');
+  dots.forEach((d, i) => {
+    const on = i <= idx;
+    d.classList.toggle('on', on);
+    d.style.background = on ? color : '';
+    d.style.borderColor = on ? 'transparent' : '';
+  });
+  if (id === 'bat-m' || id === 'bat-s') tryShowCompare();
+}
+
+// init dots
+makeDots('bat-m', 10, 'dot-battery', 'linear-gradient(135deg,#7b9e87,#5c8570)');
+makeDots('bat-s', 10, 'dot-battery', 'linear-gradient(135deg,#7b9e87,#5c8570)');
+makeDots('senso-m', 10, 'dot-senso', 'linear-gradient(135deg,#8fa8c8,#6a88b0)');
+
+// ===== EMO TOGGLE =====
+function togEmo(btn) { btn.classList.toggle('on'); tryShowCompare(); }
+
+// ===== SLEEP TOGGLE (single select per group) =====
+function togSleep(groupId, btn) {
+  document.querySelectorAll('#' + groupId + ' .sleep-opt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ===== CHECK ITEMS =====
+function togCheck(el) {
+  el.classList.toggle('on');
+  const box = el.querySelector('.check-box');
+  if (el.classList.contains('on')) box.textContent = '✓';
+  else box.textContent = '';
+}
+
+// ===== CHIPS =====
+function togChip(el, cls) {
+  const classes = ['on','on-green','on-blue','on-purple'];
+  const isOn = classes.some(c => el.classList.contains(c));
+  classes.forEach(c => el.classList.remove(c));
+  if (!isOn) el.classList.add(cls);
+}
+
+// ===== PILLAR =====
+function togPillar(btn) { btn.classList.toggle('on'); }
+
+// ===== PRIORITY SYNC =====
+function syncPrios() {
+  const map = [['prio-ui','prio-ui-s'],['prio-u','prio-u-s'],['prio-i','prio-i-s']];
+  map.forEach(([src,dst]) => {
+    const val = document.getElementById(src).value.trim();
+    document.getElementById(dst).textContent = val || '—';
+  });
+}
+document.getElementById('prio-ui').addEventListener('input', syncPrios);
+document.getElementById('prio-u').addEventListener('input', syncPrios);
+document.getElementById('prio-i').addEventListener('input', syncPrios);
+
+// ===== PROGRESS 3-STATE =====
+const progState = {};
+function cycleP(id, idx) {
+  if (!progState[id]) progState[id] = -1;
+  progState[id] = progState[id] === idx ? -1 : idx;
+  const dots = document.querySelectorAll('#' + id + ' .prog3-dot');
+  dots.forEach((d, i) => d.classList.toggle('on', i === progState[id]));
+}
+
+// ===== COMPARE MATIN/SOIR =====
+function tryShowCompare() {
+  const mBat = document.querySelectorAll('#bat-m .dot.on').length;
+  const sBat = document.querySelectorAll('#bat-s .dot.on').length;
+  if (!mBat || !sBat) return;
+  const box = document.getElementById('compare-box');
+  const txt = document.getElementById('compare-text');
+  const diff = sBat - mBat;
+  let msg = '';
+  if (diff > 2) msg = `Énergie en hausse ce soir (+${diff}/10). Bonne journée ! 🌟`;
+  else if (diff < -2) msg = `Énergie en baisse ce soir (${diff}/10). Penser à récupérer. 🔋`;
+  else msg = `Énergie stable entre le matin et le soir (${mBat > sBat ? '-' : '+'}${Math.abs(diff)}/10).`;
+  txt.textContent = msg;
+  box.style.display = 'block';
+}
+
+// ===== SENSO OK =====
+function togSensoOk(el) {
+  el.classList.toggle('on');
+  const box = el.querySelector('.check-box');
+  box.textContent = el.classList.contains('on') ? '✓' : '';
+}
+
+// ===== BILAN TABLE =====
+const bilanRows = [
+  'Sommeil','Alimentation','Activité physique',
+  'Régulation des écrans','Autres consommations',
+  'Régulation émotionnelle','Régulation sensorielle',
+  'Action et motivation','Régulation attentionnelle',
+  'Mémoire','Gestion du temps',
+  'Organisation de l\'espace','Relations'
+];
+const tbody = document.getElementById('bilan-body');
+bilanRows.forEach((label, i) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${label}</td>
+    <td><div class="bilan-radio" id="ok-${i}" onclick="bilanPick(${i},'ok')"></div></td>
+    <td><div class="bilan-radio" id="ko-${i}" onclick="bilanPick(${i},'ko')"></div></td>
+    <td><input class="bilan-note" placeholder="Notes…"></td>
+  `;
+  tbody.appendChild(tr);
+});
+const bilanSel = {};
+function bilanPick(i, v) {
+  const ok = document.getElementById('ok-'+i);
+  const ko = document.getElementById('ko-'+i);
+  if (bilanSel[i] === v) {
+    bilanSel[i] = null;
+    ok.classList.remove('on-ok'); ok.textContent='';
+    ko.classList.remove('on-ko'); ko.textContent='';
+  } else {
+    bilanSel[i] = v;
+    if (v === 'ok') {
+      ok.classList.add('on-ok'); ok.textContent='😊';
+      ko.classList.remove('on-ko'); ko.textContent='';
+    } else {
+      ko.classList.add('on-ko'); ko.textContent='😕';
+      ok.classList.remove('on-ok'); ok.textContent='';
+    }
+  }
+}
+
+// ===== LISTES =====
+const listDefs = [
+  { title: '🛒 Courses', ico: '🛒' },
+  { title: '📚 À lire / voir', ico: '📚' },
+  { title: '📞 Contacts à rappeler', ico: '📞' },
+  { title: '💡 Idées de projets', ico: '💡' },
+  { title: '🎁 Cadeaux à prévoir', ico: '🎁' },
+];
+const container = document.getElementById('listes-container');
+
+function buildList(def) {
+  const sec = document.createElement('div');
+  sec.className = 'list-section card';
+  sec.innerHTML = `<div class="list-title">${def.title}</div><div class="list-items"></div>
+    <button class="list-add-btn" onclick="addItem(this)">+ Ajouter</button>`;
+  container.appendChild(sec);
+  // add 2 blank items
+  addItem(sec.querySelector('.list-add-btn'));
+  addItem(sec.querySelector('.list-add-btn'));
+}
+
+function addItem(btn) {
+  const itemsDiv = btn.previousElementSibling;
+  const row = document.createElement('div');
+  row.className = 'list-item-row';
+  const box = document.createElement('div');
+  box.className = 'check-box';
+  box.style.cursor = 'pointer';
+  box.onclick = () => {
+    box.classList.toggle('on');
+    if (box.classList.contains('on')) {
+      box.textContent = '✓';
+      box.style.background = 'var(--accent1)';
+      box.style.borderColor = 'var(--accent1)';
+      box.style.color = 'white';
+    } else {
+      box.textContent = '';
+      box.style.background = '';
+      box.style.borderColor = '';
+      box.style.color = '';
+    }
+  };
+  const inp = document.createElement('input');
+  inp.placeholder = '…';
+  row.appendChild(box);
+  row.appendChild(inp);
+  itemsDiv.appendChild(row);
+}
+
+function addList() {
+  const name = prompt('Nom de la nouvelle liste :');
+  if (name) buildList({ title: name });
+}
+
+listDefs.forEach(buildList);
+</script>
+</body>
+</html>

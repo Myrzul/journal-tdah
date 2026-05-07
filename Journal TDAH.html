@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Journal TDAH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400;500;600;700;800&family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="monsters.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+<script type="text/babel" src="tab-matin.jsx"></script>
+<script type="text/babel" src="tabs-other.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const TWEAKS_DEFAULT = /*EDITMODE-BEGIN*/{
+  "dominantTab": "matin",
+  "mascot": true,
+  "hand": true,
+  "compact": false
+}/*EDITMODE-END*/;
+
+const TABS = [
+  { id:'matin',    label:'Matin',    color:'var(--ch-observer)',     hex:'#1B4FE5', icon: 'Sun',     num:'01', sub:"Pose le ton de la journée — données, pas verdicts." },
+  { id:'soir',     label:'Soir',     color:'var(--ch-soin)',         hex:'#B05BC9', icon: 'Moon',    num:'02', sub:"Bilan tendre. La nuit trie ce que le jour a semé." },
+  { id:'semaine',  label:'Semaine',  color:'var(--ch-emotions)',     hex:'#FF8AB8', icon: 'Calendar',num:'03', sub:"Sept jours pour voir un motif, pas un échec." },
+  { id:'boussole', label:'Boussole', color:'var(--ch-temps)',        hex:'#F26B2C', icon: 'Compass', num:'04', sub:"Pas un plan de vie. Une direction." },
+  { id:'pensees',  label:'Pensées',  color:'var(--ch-attention)',    hex:'#FF1F8F', icon: 'Cloud',   num:'05', sub:"Examiner les boucles. Les laisser passer." },
+  { id:'listes',   label:'Listes',   color:'var(--ch-controle)',     hex:'#1FBF7A', icon: 'List',    num:'06', sub:"Vider la tête. Respirer. La page se souvient." },
+];
+
+function App() {
+  const [tweaks, setTweaks] = useState(TWEAKS_DEFAULT);
+  const [tabId, setTabId] = useState(TWEAKS_DEFAULT.dominantTab || 'matin');
+  const [editMode, setEditMode] = useState(false);
+  const [bouncing, setBouncing] = useState(false);
+  const [priorities, setPriorities] = useState(['','','']);
+
+  // load priorities from matin storage on mount
+  useEffect(() => {
+    try {
+      const m = JSON.parse(localStorage.getItem('jtdah-matin-v3') || '{}');
+      if (m.prios) setPriorities(m.prios);
+    } catch {}
+  }, []);
+
+  // edit mode protocol
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data) return;
+      if (e.data.type === '__activate_edit_mode') setEditMode(true);
+      if (e.data.type === '__deactivate_edit_mode') setEditMode(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({type:'__edit_mode_available'}, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const setTweak = (k, v) => {
+    setTweaks(p => {
+      const next = { ...p, [k]: v };
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits: { [k]: v }}, '*');
+      return next;
+    });
+    if (k === 'dominantTab') setTabId(v);
+  };
+
+  // apply body classes
+  useEffect(() => {
+    document.body.classList.toggle('tweaks-no-mascot', !tweaks.mascot);
+    document.body.classList.toggle('tweaks-no-hand', !tweaks.hand);
+    document.body.classList.toggle('tweaks-compact', !!tweaks.compact);
+  }, [tweaks]);
+
+  const tab = TABS.find(t => t.id === tabId) || TABS[0];
+
+  // dominant color CSS var on root
+  useEffect(() => {
+    document.documentElement.style.setProperty('--dominant', tab.color);
+  }, [tab.color]);
+
+  // bounce mascot when tab changes
+  useEffect(() => {
+    setBouncing(true);
+    const t = setTimeout(() => setBouncing(false), 800);
+    return () => clearTimeout(t);
+  }, [tabId]);
+
+  const I = window.Icons;
+  const Mo = window.Monsters;
+  const TabIcon = I[tab.icon];
+
+  // mascot per tab
+  const tabMascot = {
+    matin: Mo.Curieux, soir: Mo.Endormi, semaine: Mo.Reflexif,
+    boussole: Mo.Fier, pensees: Mo.Surprise, listes: Mo.Calme
+  }[tab.id] || Mo.Curieux;
+
+  return (
+    <>
+      <window.TweaksTrigger onClick={() => setEditMode(true)}/>
+      {editMode && (
+        <window.TweaksPanel
+          tweaks={tweaks} setTweak={setTweak}
+          onClose={() => { setEditMode(false); window.parent.postMessage({type:'__edit_mode_dismissed'}, '*'); }}
+          palette={TABS.map(t => ({ id:t.id, color:t.hex, label:t.label }))}/>
+      )}
+
+      <header className="app-header" style={{background: tab.color}}>
+        <div className="brand-row">
+          <window.Umbrella color="white" size={42}/>
+          <div className="brand-text">
+            <span className="brand-eyebrow">Pratique d'introspection · TDAH</span>
+            <span className="brand-title">JOURNAL TDAH</span>
+          </div>
+        </div>
+
+        <div className="header-eyebrow">
+          <span>{tab.num}</span>
+          <span>·</span>
+          <span>{tab.label}</span>
+        </div>
+        <h1 className="tab-title">{tab.label.toUpperCase()}</h1>
+        <p className="tab-subtitle">{tab.sub}</p>
+
+        <div className={`header-mascot ${bouncing ? 'bounce' : ''}`}>
+          {React.createElement(tabMascot, { color: 'white' })}
+        </div>
+
+        <div className="umbrella-pill">
+          <window.Umbrella color={tab.hex} number={tab.num.replace('0','')}/>
+        </div>
+      </header>
+
+      <nav className="tabs-nav">
+        {TABS.map(t => {
+          const Ic = I[t.icon];
+          return (
+            <button key={t.id}
+              className={`tab-btn ${t.id === tabId ? 'on' : ''}`}
+              style={{'--tab-color': t.color}}
+              onClick={() => setTabId(t.id)}>
+              <span className="tab-dot" style={{background: t.hex}}></span>
+              <Ic size={14} color={t.id === tabId ? 'var(--ink)' : 'var(--ink-2)'}/>
+              <span>{t.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      <main className="page-shell">
+        <div className="page" key={tab.id}>
+          {tab.id === 'matin'    && <window.TabMatin pushPriorities={setPriorities} dominant={tab.color}/>}
+          {tab.id === 'soir'     && <window.TabSoir priorities={priorities}/>}
+          {tab.id === 'semaine'  && <window.TabSemaine/>}
+          {tab.id === 'boussole' && <window.TabBoussole/>}
+          {tab.id === 'pensees'  && <window.TabPensees/>}
+          {tab.id === 'listes'   && <window.TabListes/>}
+        </div>
+      </main>
+
+      <footer className="app-footer">
+        Doucement, à ton rythme.
+        <span className="sig">— ton journal —</span>
+      </footer>
+    </>
+  );
+}
+
+const wait = () => {
+  if (window.Icons && window.Monsters && window.TabMatin && window.TabSoir && window.TweaksPanel) {
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  } else {
+    setTimeout(wait, 50);
+  }
+};
+wait();
+</script>
+</body>
+</html>
