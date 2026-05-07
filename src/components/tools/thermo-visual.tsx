@@ -74,37 +74,24 @@ export function ThermoVisual({
     return n as LevelN;
   };
 
-  useEffect(() => {
-    const move = (e: MouseEvent | TouchEvent) => {
-      if (!dragging.current) return;
-      const cy =
-        "touches" in e
-          ? e.touches[0]?.clientY
-          : (e as MouseEvent).clientY;
-      if (cy != null) onPick(compute(cy));
-    };
-    const up = () => {
-      dragging.current = false;
-    };
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
-    window.addEventListener("touchmove", move, { passive: true });
-    window.addEventListener("touchend", up);
-    return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", up);
-      window.removeEventListener("touchmove", move);
-      window.removeEventListener("touchend", up);
-    };
-  }, [onPick]);
-
-  const start = (e: React.MouseEvent | React.TouchEvent) => {
+  // Pointer Events : un seul API pour souris + tactile + stylet,
+  // setPointerCapture évite la perte du drag quand le doigt sort de l'élément.
+  const onPointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
     dragging.current = true;
-    const cy =
-      "touches" in e
-        ? (e as React.TouchEvent).touches[0]?.clientY
-        : (e as React.MouseEvent).clientY;
-    if (cy != null) onPick(compute(cy));
+    onPick(compute(e.clientY));
+  };
+
+  const onPointerMove = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (!dragging.current) return;
+    onPick(compute(e.clientY));
+  };
+
+  const onPointerUp = (e: React.PointerEvent<SVGSVGElement>) => {
+    dragging.current = false;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
   };
 
   // breathing scale on head
@@ -297,8 +284,10 @@ export function ThermoVisual({
       width="100%"
       height={H}
       viewBox={`0 0 ${W} ${H}`}
-      onMouseDown={start}
-      onTouchStart={start}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
       preserveAspectRatio="xMidYMid meet"
       style={{
         display: "block",
