@@ -2,10 +2,10 @@ import {
   IconCalendar,
   IconCloud,
   IconCompass,
+  type IconComponent,
   IconList,
   IconMoon,
   IconSun,
-  type IconComponent,
 } from "@/components/icons";
 import {
   MonsterCalme,

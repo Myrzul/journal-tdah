@@ -5,8 +5,8 @@ import type { ReactNode } from "react";
 import { AppFooter } from "./app-footer";
 import { AppHeader } from "./app-header";
 import { DominantTabSetter } from "./dominant-color";
-import { TabsNav } from "./tabs-nav";
 import { TABS_BY_ID, type TabId } from "./tabs-config";
+import { TabsNav } from "./tabs-nav";
 
 const DEFAULT_TAB: TabId = "matin";
 

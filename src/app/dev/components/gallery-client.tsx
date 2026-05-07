@@ -28,23 +28,12 @@ import {
   IconSparkle,
   IconStarBig,
   IconSun,
+  Icons,
   IconTarget,
   IconUsers,
   IconWind,
   IconWriting,
-  Icons,
 } from "@/components/icons";
-import {
-  MonsterCalme,
-  MonsterCurieux,
-  MonsterEndormi,
-  MonsterEnergique,
-  MonsterFier,
-  MonsterInquiet,
-  MonsterReflexif,
-  MonsterSurprise,
-  Umbrella,
-} from "@/components/monsters";
 import { Card, CardColor } from "@/components/journal/cards";
 import {
   Checklist,
@@ -70,6 +59,17 @@ import {
   Retain,
   SectionLabel,
 } from "@/components/journal/typography";
+import {
+  MonsterCalme,
+  MonsterCurieux,
+  MonsterEndormi,
+  MonsterEnergique,
+  MonsterFier,
+  MonsterInquiet,
+  MonsterReflexif,
+  MonsterSurprise,
+  Umbrella,
+} from "@/components/monsters";
 
 const MONSTERS = [
   ["Curieux", MonsterCurieux, "#1B4FE5"],
@@ -139,12 +139,22 @@ export function GalleryClient() {
             CONDENSED 18px BOLD
           </div>
           <div
-            style={{ fontFamily: "var(--font-body)", fontSize: 15, lineHeight: 1.55, marginTop: 12 }}
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 15,
+              lineHeight: 1.55,
+              marginTop: 12,
+            }}
           >
             Body Inter 15px — la respiration tranquille du journal. Doucement, à ton rythme.
           </div>
           <div
-            style={{ fontFamily: "var(--font-hand)", fontSize: 32, marginTop: 12, color: "var(--ink)" }}
+            style={{
+              fontFamily: "var(--font-hand)",
+              fontSize: 32,
+              marginTop: 12,
+              color: "var(--ink)",
+            }}
           >
             Caveat 32px — la voix manuscrite, complice
           </div>
@@ -284,16 +294,18 @@ export function GalleryClient() {
         <Headline>Cartes</Headline>
 
         <Card icon={IconBattery} title="Card simple" sub="Avec une icône et un sous-titre.">
-          <div style={{ paddingTop: 8, color: "var(--ink-2)" }}>
-            Contenu libre dans la carte.
-          </div>
+          <div style={{ paddingTop: 8, color: "var(--ink-2)" }}>Contenu libre dans la carte.</div>
         </Card>
 
         <Card icon={IconHeart} title="Card sans sous-titre">
           <div style={{ paddingTop: 8 }}>Plus dépouillée.</div>
         </Card>
 
-        <CardColor ribbon="EXEMPLE" title="Card colorée" sub="Avec un ribbon et la couleur dominante.">
+        <CardColor
+          ribbon="EXEMPLE"
+          title="Card colorée"
+          sub="Avec un ribbon et la couleur dominante."
+        >
           <p style={{ marginTop: 8, opacity: 0.92 }}>
             Utile pour les blocs « à retenir » ou les call-to-action mis en valeur.
           </p>

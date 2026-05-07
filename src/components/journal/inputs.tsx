@@ -15,7 +15,14 @@ type FieldProps = {
   className?: string;
 };
 
-export function Field({ value, onChange, placeholder, multiline, rows = 1, className }: FieldProps) {
+export function Field({
+  value,
+  onChange,
+  placeholder,
+  multiline,
+  rows = 1,
+  className,
+}: FieldProps) {
   if (multiline) {
     return (
       <textarea

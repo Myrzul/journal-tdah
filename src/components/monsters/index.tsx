@@ -44,13 +44,7 @@ export const MonsterCurieux = ({ color }: MonsterProps) => (
   <SvgFrame>
     <Antenna color={color} />
     <Body color={color} variant="blob" />
-    <path
-      d="M16 56 Q8 46 12 36"
-      stroke={color}
-      strokeWidth="7"
-      fill="none"
-      strokeLinecap="round"
-    />
+    <path d="M16 56 Q8 46 12 36" stroke={color} strokeWidth="7" fill="none" strokeLinecap="round" />
     <path
       d="M104 56 Q112 46 108 36"
       stroke={color}
@@ -115,13 +109,7 @@ export const MonsterFier = ({ color }: MonsterProps) => (
     <Antenna color={color} />
     <circle cx="60" cy="-2" r="6" fill="#F0B340" />
     <Body color={color} variant="round" />
-    <path
-      d="M14 50 Q4 38 10 24"
-      stroke={color}
-      strokeWidth="7"
-      fill="none"
-      strokeLinecap="round"
-    />
+    <path d="M14 50 Q4 38 10 24" stroke={color} strokeWidth="7" fill="none" strokeLinecap="round" />
     <path
       d="M106 50 Q116 38 110 24"
       stroke={color}
@@ -181,13 +169,7 @@ export const MonsterEnergique = ({ color }: MonsterProps) => (
       stroke="#0E0E10"
       strokeWidth="1"
     />
-    <path
-      d="M14 46 Q4 56 10 70"
-      stroke={color}
-      strokeWidth="7"
-      fill="none"
-      strokeLinecap="round"
-    />
+    <path d="M14 46 Q4 56 10 70" stroke={color} strokeWidth="7" fill="none" strokeLinecap="round" />
     <path
       d="M106 46 Q116 56 110 70"
       stroke={color}
@@ -292,14 +274,8 @@ export const Umbrella = ({ color = "#1B4FE5", number, size = 80 }: UmbrellaProps
     style={{ display: "block" }}
     aria-hidden="true"
   >
-    <path
-      d="M60 18 C32 18 14 42 12 62 L108 62 C106 42 88 18 60 18 Z"
-      fill="#0E0E10"
-    />
-    <path
-      d="M12 62 Q24 56 36 62 Q48 68 60 62 Q72 56 84 62 Q96 68 108 62"
-      fill="#0E0E10"
-    />
+    <path d="M60 18 C32 18 14 42 12 62 L108 62 C106 42 88 18 60 18 Z" fill="#0E0E10" />
+    <path d="M12 62 Q24 56 36 62 Q48 68 60 62 Q72 56 84 62 Q96 68 108 62" fill="#0E0E10" />
     <path
       d="M12 62 Q24 56 36 62 Q48 68 60 62 Q72 56 84 62 Q96 68 108 62"
       stroke="#0E0E10"

@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { TABS, type TabId } from "./tabs-config";
 import { cn } from "@/lib/utils/cn";
+import { TABS, type TabId } from "./tabs-config";
 
 type TabsNavProps = {
-  current: TabId;
+  current: TabId | null;
 };
 
 export function TabsNav({ current }: TabsNavProps) {

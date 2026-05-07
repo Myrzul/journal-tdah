@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   IconBattery,
+  IconChat,
   IconCloud,
   IconCompass,
   IconDrop,
@@ -19,25 +20,9 @@ import {
   IconTooth,
   IconWind,
   IconWriting,
-  IconChat,
 } from "@/components/icons";
-import {
-  MonsterCalme,
-  MonsterCurieux,
-  MonsterEndormi,
-  MonsterEnergique,
-  MonsterInquiet,
-  MonsterReflexif,
-} from "@/components/monsters";
 import { Card } from "@/components/journal/cards";
-import {
-  Checklist,
-  Chips,
-  EmoGrid,
-  Field,
-  PrioRow,
-  Scale,
-} from "@/components/journal/inputs";
+import { Checklist, Chips, EmoGrid, Field, PrioRow, Scale } from "@/components/journal/inputs";
 import {
   HandNote,
   Headline,
@@ -47,12 +32,22 @@ import {
   Retain,
   SectionLabel,
 } from "@/components/journal/typography";
+import {
+  MonsterCalme,
+  MonsterCurieux,
+  MonsterEndormi,
+  MonsterEnergique,
+  MonsterInquiet,
+  MonsterReflexif,
+} from "@/components/monsters";
+import { relativeDateLabel } from "@/lib/utils/date";
 
 /**
  * Démo statique de l'onglet Matin pour la phase 2 (port du design).
  * État local uniquement — la persistance et l'auth arrivent en phases 3-4.
  */
-export function MatinDemo() {
+export function MatinDemo({ activeDate = new Date() }: { activeDate?: Date }) {
+  const dateLabel = relativeDateLabel(activeDate);
   const [energie, setEnergie] = useState<number>();
   const [mental, setMental] = useState<number>();
   const [sommeil, setSommeil] = useState<number>();
@@ -68,7 +63,7 @@ export function MatinDemo() {
   return (
     <>
       <IntroHand>
-        Comment je me sens, là, maintenant ?
+        Mon matin, {dateLabel}.
         <br />
         <span style={{ color: "var(--ink-2)" }}>Pas de pression. On observe, c'est tout.</span>
       </IntroHand>
@@ -77,28 +72,13 @@ export function MatinDemo() {
       <Headline accent="(données, pas verdicts)">Je m'observe</Headline>
 
       <Card icon={IconBattery} title="Énergie corporelle" sub="De vide à pleine batterie.">
-        <Scale
-          value={energie}
-          onChange={setEnergie}
-          labelLow="VIDE"
-          labelHigh="PLEINE"
-        />
+        <Scale value={energie} onChange={setEnergie} labelLow="VIDE" labelHigh="PLEINE" />
       </Card>
       <Card icon={IconCloud} title="État mental" sub="Brume, ou tête claire ?">
-        <Scale
-          value={mental}
-          onChange={setMental}
-          labelLow="BROUILLARD"
-          labelHigh="LIMPIDE"
-        />
+        <Scale value={mental} onChange={setMental} labelLow="BROUILLARD" labelHigh="LIMPIDE" />
       </Card>
       <Card icon={IconMoon} title="Sommeil" sub="Comment était la nuit ?">
-        <Scale
-          value={sommeil}
-          onChange={setSommeil}
-          labelLow="AGITÉ"
-          labelHigh="RÉPARATEUR"
-        />
+        <Scale value={sommeil} onChange={setSommeil} labelLow="AGITÉ" labelHigh="RÉPARATEUR" />
         <Label>Heure du coucher · réveil</Label>
         <div style={{ display: "flex", gap: 10 }}>
           <Field value={heureCouche} onChange={setHeureCouche} placeholder="22h30" />

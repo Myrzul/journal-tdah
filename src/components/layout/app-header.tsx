@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Umbrella } from "@/components/monsters";
 import { TABS_BY_ID, type TabId } from "./tabs-config";
 
@@ -14,13 +15,18 @@ export function AppHeader({ tabId }: AppHeaderProps) {
 
   return (
     <header className="app-header" style={{ background: tab.cssColor }}>
-      <div className="brand-row">
+      <Link
+        href="/"
+        className="brand-row"
+        aria-label="Retour à l'accueil"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
         <Umbrella color="white" size={42} />
         <div className="brand-text">
           <span className="brand-eyebrow">Pratique d'introspection · TDAH</span>
           <span className="brand-title">JOURNAL TDAH</span>
         </div>
-      </div>
+      </Link>
 
       <div className="header-eyebrow">
         <span>{tab.num}</span>

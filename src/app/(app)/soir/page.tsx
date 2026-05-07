@@ -1,5 +1,12 @@
-import { TabPlaceholder } from "@/components/layout/tab-placeholder";
+import { parseDateParam } from "@/lib/utils/date";
+import { SoirPlaceholder } from "./soir-placeholder";
 
-export default function SoirPage() {
-  return <TabPlaceholder tabId="soir" />;
+type Props = {
+  searchParams: Promise<{ date?: string }>;
+};
+
+export default async function SoirPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const activeDate = parseDateParam(params.date) ?? new Date();
+  return <SoirPlaceholder activeDate={activeDate} />;
 }
