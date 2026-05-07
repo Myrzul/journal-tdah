@@ -48,10 +48,6 @@ export function AppHeader({ tabId }: AppHeaderProps) {
       >
         <Mascot color="white" />
       </motion.div>
-
-      <div className="umbrella-pill">
-        <Umbrella color={tab.hex} number={Number(tab.num)} />
-      </div>
     </header>
   );
 }

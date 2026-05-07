@@ -36,10 +36,6 @@ export function HubHeader() {
       >
         <MonsterReflexif color="white" />
       </motion.div>
-
-      <div className="umbrella-pill">
-        <Umbrella color={HUB_COLOR_HEX} number={0} />
-      </div>
     </header>
   );
 }

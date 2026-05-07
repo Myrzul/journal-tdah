@@ -1298,9 +1298,18 @@ label.flabel {
   gap: 24px;
   align-items: center;
 }
+.thermo-panel-grid > svg {
+  display: block;
+  margin: 0 auto;
+}
 @media (max-width: 540px) {
   .thermo-panel-grid {
     grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .thermo-panel-grid .thermo-cluster {
+    justify-content: center;
   }
 }
 .thermo-eyebrow {
