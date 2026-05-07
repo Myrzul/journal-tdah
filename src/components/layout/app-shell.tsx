@@ -8,7 +8,7 @@ import { DominantTabSetter } from "./dominant-color";
 import { TABS_BY_ID, type TabId } from "./tabs-config";
 import { TabsNav } from "./tabs-nav";
 
-const DEFAULT_TAB: TabId = "matin";
+const DEFAULT_TAB: TabId = "aujourdhui";
 
 function tabFromPath(pathname: string): TabId {
   const seg = pathname.split("/").filter(Boolean)[0] as TabId | undefined;

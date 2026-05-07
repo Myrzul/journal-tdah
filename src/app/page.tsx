@@ -102,7 +102,7 @@ export default function HubPage() {
           >
             <div className="hub-tile-row">
               <Link
-                href={`/matin?date=${todayISO}`}
+                href={`/aujourdhui?moment=matin&date=${todayISO}`}
                 className={`hub-tile ${morningToday ? "done" : "todo"}`}
               >
                 <span className="hub-tile-state">
@@ -130,7 +130,7 @@ export default function HubPage() {
           >
             <div className="hub-tile-row">
               <Link
-                href={`/soir?date=${todayISO}`}
+                href={`/aujourdhui?moment=soir&date=${todayISO}`}
                 className={`hub-tile ${eveningToday ? "done" : "todo"}`}
               >
                 <span className="hub-tile-state">{eveningToday ? "✓" : "→"}</span>
@@ -148,7 +148,11 @@ export default function HubPage() {
           <Headline accent="d'un seul regard">Le calendrier</Headline>
 
           <Card title="Mois en cours" sub="Clique sur un jour passé pour le rouvrir.">
-            <CalendarHeatmap states={states} today={today} hrefBase="/matin?date=" />
+            <CalendarHeatmap
+              states={states}
+              today={today}
+              hrefBase="/aujourdhui?moment=matin&date="
+            />
           </Card>
 
           {/* ============ MA BOUSSOLE ============ */}
@@ -176,7 +180,7 @@ export default function HubPage() {
               <li>{data.compass.e2}</li>
               <li>{data.compass.e3}</li>
             </ul>
-            <Link href="/boussole" className="hub-card-link">
+            <Link href="/recap" className="hub-card-link">
               Modifier ma boussole →
             </Link>
           </Card>

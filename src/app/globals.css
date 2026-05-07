@@ -1207,6 +1207,592 @@ label.flabel {
 }
 
 /* =================================================================
+   THERMOMÈTRE — variant ThermoSteps (cartes 5 niveaux)
+   ================================================================= */
+.thermo-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.thermo-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  border: 2px solid var(--ink);
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.thermo-step.on {
+  background: var(--step-color);
+  color: white;
+  box-shadow: var(--shadow-mono);
+  transform: translate(-2px, -2px);
+}
+.thermo-step-num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.thermo-step-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.thermo-step-label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+.thermo-step-sub {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 2px;
+  font-family: var(--font-cond);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* =================================================================
+   THERMOMÈTRE — bandeau coloré du panneau principal
+   ================================================================= */
+.thermo-panel {
+  border: 2px solid var(--ink);
+  border-radius: var(--r-3xl);
+  padding: 24px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+.thermo-panel.empty {
+  background: var(--paper);
+  color: var(--ink);
+}
+.thermo-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  background-image: radial-gradient(circle, white 1px, transparent 1.4px);
+  background-size: 14px 14px;
+}
+.thermo-panel.empty::before { display: none; }
+.thermo-panel-content {
+  position: relative;
+  z-index: 1;
+}
+.thermo-panel-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+}
+@media (max-width: 540px) {
+  .thermo-panel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.thermo-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.thermo-label {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 5vw, 38px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  margin: 8px 0 12px;
+}
+.thermo-cog {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.95;
+  margin-bottom: 12px;
+}
+.thermo-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.thermo-cluster-chip {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.thermo-empty-msg {
+  font-family: var(--font-hand);
+  font-size: 26px;
+  color: var(--ink);
+}
+
+/* =================================================================
+   THERMOMÈTRE — bandeau de respiration suggérée + cohérence cardiaque
+   ================================================================= */
+.breath-suggest {
+  background: var(--ink);
+  color: white;
+  padding: 16px 18px;
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  border: 2px solid var(--ink);
+}
+.breath-suggest-text {
+  flex: 1;
+}
+.breath-suggest-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.breath-suggest-sub {
+  font-size: 13px;
+  opacity: 0.85;
+}
+.breath-yes {
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: white;
+  color: var(--ink);
+  border: 2px solid white;
+  cursor: pointer;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.breath-dismiss {
+  background: transparent;
+  border: none;
+  color: white;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.coherence-modal {
+  background: var(--ink);
+  color: white;
+  border-radius: var(--r-3xl);
+  padding: 40px 32px;
+  text-align: center;
+  margin: 24px 0;
+  border: 2px solid var(--ink);
+  position: relative;
+}
+.coherence-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+.coherence-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+.coherence-orb-wrap {
+  position: relative;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.coherence-orb {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4dd0b0 0%, #1b4fe5 100%);
+  transition: transform 5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.coherence-phase {
+  font-family: var(--font-display);
+  font-size: 38px;
+  color: white;
+}
+.coherence-count {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: white;
+  margin-top: 4px;
+}
+.coherence-cycle {
+  font-family: var(--font-hand);
+  font-size: 24px;
+  margin-top: 16px;
+  opacity: 0.9;
+}
+
+/* =================================================================
+   CRISIS MODAL
+   ================================================================= */
+.crisis-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(14, 14, 16, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.crisis-card {
+  background: white;
+  border-radius: var(--r-3xl);
+  padding: 32px 28px;
+  max-width: 520px;
+  width: 100%;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ch-observer);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.crisis-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+.crisis-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+.crisis-intro {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+.crisis-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.crisis-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--r-lg);
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.crisis-action.primary {
+  background: var(--ch-observer);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.crisis-action.secondary {
+  background: white;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.crisis-action.dark {
+  background: var(--ink);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.crisis-action-meta {
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  margin-left: auto;
+}
+.crisis-quote {
+  font-family: var(--font-hand);
+  font-size: 22px;
+  color: var(--ink);
+  text-align: center;
+  margin-top: 8px;
+}
+.crisis-later {
+  margin-top: 14px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: 8px;
+}
+
+/* =================================================================
+   THERMOMÈTRE — historique (timeline mini)
+   ================================================================= */
+.thermo-hist-empty {
+  padding: 18px 20px;
+  border-radius: var(--r-lg);
+  border: 2px dashed var(--muted);
+  color: var(--ink-2);
+  font-size: 13px;
+  text-align: center;
+  font-family: var(--font-cond);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+.thermo-hist-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 90px;
+  padding: 0 4px;
+  border-bottom: 2px solid var(--ink);
+}
+.thermo-hist-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+.thermo-hist-bar {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  border: 2px solid var(--ink);
+  border-bottom: none;
+  min-height: 12px;
+}
+.thermo-hist-axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-cond);
+  font-size: 10px;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  padding: 0 4px;
+  margin-top: 6px;
+}
+.thermo-hist-recent {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.thermo-hist-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.thermo-hist-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+.thermo-hist-row-label {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+  color: var(--ink);
+}
+.thermo-hist-row-meta {
+  flex: 1;
+  color: var(--ink-2);
+  font-size: 12px;
+}
+
+/* =================================================================
+   TRIGGER GUIDE — chips suggérés
+   ================================================================= */
+.trigger-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.trigger-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.trigger-prompt {
+  font-family: var(--font-hand);
+  font-size: 18px;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  border: 1.5px dashed var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.trigger-prompt:hover {
+  background: var(--paper);
+}
+
+/* =================================================================
+   SAVE BUTTON observation
+   ================================================================= */
+.thermo-save {
+  width: 100%;
+  padding: 18px 20px;
+  border-radius: var(--r-xl);
+  color: white;
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-mono);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 15;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  transition: transform 0.12s;
+}
+.thermo-save:active {
+  transform: translate(2px, 2px);
+}
+
+/* =================================================================
+   BOUTON SOS flottant
+   ================================================================= */
+.sos-button {
+  position: fixed;
+  bottom: 84px;
+  left: 16px;
+  z-index: 70;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: white;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  box-shadow: 4px 4px 0 var(--ch-observer);
+}
+.sos-button:hover {
+  transform: translate(-1px, -1px);
+}
+
+/* =================================================================
+   RECAP — séparateur entre Semaine et Boussole
+   ================================================================= */
+.recap-divider {
+  height: 2px;
+  background: var(--ink);
+  margin: 64px auto;
+  max-width: 60px;
+  border-radius: 2px;
+  opacity: 0.4;
+}
+
+/* =================================================================
+   MOMENT TOGGLE — Aujourd'hui (Matin / Soir)
+   ================================================================= */
+.moment-toggle {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: white;
+  margin: 0 0 24px;
+  position: relative;
+  z-index: 2;
+}
+.moment-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: transparent;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: background 0.15s, color 0.15s;
+}
+.moment-btn:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+.moment-btn.on {
+  color: white;
+}
+.moment-btn.matin.on {
+  background: var(--ch-observer);
+}
+.moment-btn.soir.on {
+  background: var(--ch-soin);
+}
+
+/* =================================================================
    HUB — sections, tiles, valeurs
    ================================================================= */
 
