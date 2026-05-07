@@ -1,5 +1,5 @@
-import { TabPlaceholder } from "@/components/layout/tab-placeholder";
+import { BoussoleDemo } from "./boussole-demo";
 
 export default function BoussolePage() {
-  return <TabPlaceholder tabId="boussole" />;
+  return <BoussoleDemo />;
 }

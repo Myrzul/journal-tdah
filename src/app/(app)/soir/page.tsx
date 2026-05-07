@@ -1,5 +1,5 @@
 import { parseDateParam } from "@/lib/utils/date";
-import { SoirPlaceholder } from "./soir-placeholder";
+import { SoirDemo } from "./soir-demo";
 
 type Props = {
   searchParams: Promise<{ date?: string }>;
@@ -8,5 +8,5 @@ type Props = {
 export default async function SoirPage({ searchParams }: Props) {
   const params = await searchParams;
   const activeDate = parseDateParam(params.date) ?? new Date();
-  return <SoirPlaceholder activeDate={activeDate} />;
+  return <SoirDemo activeDate={activeDate} />;
 }

@@ -1,5 +1,5 @@
-import { TabPlaceholder } from "@/components/layout/tab-placeholder";
+import { ListesDemo } from "./listes-demo";
 
 export default function ListesPage() {
-  return <TabPlaceholder tabId="listes" />;
+  return <ListesDemo />;
 }

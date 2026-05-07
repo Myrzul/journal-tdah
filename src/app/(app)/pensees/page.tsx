@@ -1,5 +1,5 @@
-import { TabPlaceholder } from "@/components/layout/tab-placeholder";
+import { PenseesDemo } from "./pensees-demo";
 
 export default function PenseesPage() {
-  return <TabPlaceholder tabId="pensees" />;
+  return <PenseesDemo />;
 }

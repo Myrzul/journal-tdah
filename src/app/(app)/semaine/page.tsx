@@ -1,5 +1,5 @@
-import { TabPlaceholder } from "@/components/layout/tab-placeholder";
+import { SemaineDemo } from "./semaine-demo";
 
 export default function SemainePage() {
-  return <TabPlaceholder tabId="semaine" />;
+  return <SemaineDemo />;
 }
