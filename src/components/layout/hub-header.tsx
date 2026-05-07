@@ -11,7 +11,7 @@ export function HubHeader() {
       <div className="brand-row">
         <Umbrella color="white" size={42} />
         <div className="brand-text">
-          <span className="brand-eyebrow">Pratique d'introspection · TDAH</span>
+          <span className="brand-eyebrow">Pratique d'introspection</span>
           <span className="brand-title">JOURNAL TDAH</span>
         </div>
       </div>
