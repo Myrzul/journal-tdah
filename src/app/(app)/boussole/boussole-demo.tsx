@@ -76,7 +76,7 @@ export function BoussoleDemo() {
       <Headline accent="dans 3 mois">Ce que je voudrais</Headline>
       <Card
         icon={IconCompass}
-        title="Trois envies — pas trois objectifs"
+        title="Trois envies, pas trois objectifs"
         sub="Plutôt « je voudrais ressentir / vivre… » que « je dois atteindre… »"
       >
         <Label>Envie 1</Label>
@@ -128,7 +128,7 @@ export function BoussoleDemo() {
         title="LA BOUSSOLE NE CHOISIT PAS LE CHEMIN. ELLE INDIQUE LE NORD."
         monster={MonsterFier}
       >
-        Tu peux dévier. Tu peux reculer. La boussole, elle, reste fiable — elle
+        Tu peux dévier. Tu peux reculer. La boussole, elle, reste fiable. Elle
         attend que tu lui demandes.
       </Retain>
     </>

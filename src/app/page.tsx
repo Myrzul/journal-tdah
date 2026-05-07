@@ -97,7 +97,7 @@ export default function HubPage() {
             sub={
               morningToday
                 ? "Posé. Tu peux le revoir, le compléter, ou simplement passer."
-                : "Pas encore posé. Pas de pression — quand tu veux."
+                : "Pas encore posé. Pas de pression, quand tu veux."
             }
           >
             <div className="hub-tile-row">
@@ -125,7 +125,7 @@ export default function HubPage() {
             sub={
               eveningToday
                 ? "Bilan posé. Tu peux le rouvrir si une chose veut sortir."
-                : "Le soir vient en fin de journée — quand tu seras prêt(e)."
+                : "Le soir vient en fin de journée, quand tu seras prêt(e)."
             }
           >
             <div className="hub-tile-row">
@@ -169,7 +169,7 @@ export default function HubPage() {
             icon={IconCompass}
             iconColor="var(--ch-temps)"
             title="Cette saison"
-            sub="Pas trois objectifs — trois envies."
+            sub="Pas trois objectifs. Trois envies."
           >
             <ul className="hub-envies">
               <li>{data.compass.e1}</li>
@@ -230,7 +230,7 @@ export default function HubPage() {
           {/* ============ RETAIN ============ */}
           <Retain title="TON JOURNAL EST UN MIROIR, PAS UN JUGE." monster={MonsterReflexif}>
             Ce que tu vois ici, c'est ton paysage. Pas de score, pas de classement, pas de série
-            à tenir. Juste des données pour mieux te comprendre — et te traiter avec un peu plus
+            à tenir. Juste des données pour mieux te comprendre, et te traiter avec un peu plus
             de douceur.
           </Retain>
         </div>

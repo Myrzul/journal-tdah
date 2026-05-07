@@ -120,7 +120,7 @@ export function MatinDemo({ activeDate = new Date() }: { activeDate?: Date }) {
         <br />
         <span className="accent">gestes-ancres</span>
       </Headline>
-      <Card icon={IconHand} title="Ce que j'ai déjà fait" sub="Coche au fil — sans culpabilité.">
+      <Card icon={IconHand} title="Ce que j'ai déjà fait" sub="Coche au fil, sans culpabilité.">
         <Checklist
           value={routine}
           onChange={setRoutine}
@@ -136,8 +136,8 @@ export function MatinDemo({ activeDate = new Date() }: { activeDate?: Date }) {
       </Card>
 
       <HLQuote>
-        Une routine n'est pas une prison —<br />
-        c'est un point d'appui.
+        Une routine n'est pas une prison.<br />
+        C'est un point d'appui.
       </HLQuote>
 
       <SectionLabel num="4">Intention du jour</SectionLabel>
@@ -150,7 +150,7 @@ export function MatinDemo({ activeDate = new Date() }: { activeDate?: Date }) {
       <Card
         icon={IconCompass}
         title="Mon intention"
-        sub="Un mot, une phrase. Pas un objectif — une direction."
+        sub="Un mot, une phrase. Pas un objectif. Une direction."
       >
         <Field
           value={intention}

@@ -92,7 +92,7 @@ export function SoirDemo({ activeDate = new Date() }: { activeDate?: Date }) {
           </div>
         ))}
         <Compare>
-          Compare avec ton intention du matin. Pas pour t'en vouloir — pour
+          Compare avec ton intention du matin. Pas pour t'en vouloir. Pour
           repérer ce qui t'a éloigné(e).
         </Compare>
       </Card>
@@ -125,7 +125,7 @@ export function SoirDemo({ activeDate = new Date() }: { activeDate?: Date }) {
       <Card
         icon={IconSparkle}
         title="Le moment qui s'impose"
-        sub="Beau ou difficile — le premier qui revient."
+        sub="Beau ou difficile, le premier qui revient."
       >
         <FreeArea
           value={moment}

@@ -36,7 +36,7 @@ export const TABS: readonly TabConfig[] = [
     hex: "#1B4FE5",
     cssColor: "var(--ch-observer)",
     num: "01",
-    sub: "Pose le ton de la journée — données, pas verdicts.",
+    sub: "Pose le ton de la journée. Des données, pas des verdicts.",
     icon: IconSun,
     mascot: MonsterCurieux,
   },

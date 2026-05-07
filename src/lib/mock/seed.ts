@@ -103,7 +103,7 @@ const INTENTIONS = [
 const LACHERS = [
   "Cette journée a été plus fluide que prévu.",
   "Je laisse cette tension au bureau, pas dans le lit.",
-  "Tout n'a pas été parfait — et c'est très bien.",
+  "Tout n'a pas été parfait, et c'est très bien.",
   "Je dépose ce que je n'ai pas pu finir.",
   "Une chose à la fois, demain aussi.",
   "Je remercie le moi de ce matin d'avoir essayé.",
@@ -119,7 +119,7 @@ const WINS = [
 ];
 
 const LEARNS = [
-  "Mon énergie chute systématiquement les lundis matin — je vais réorganiser le lever.",
+  "Mon énergie chute systématiquement les lundis matin, je vais réorganiser le lever.",
   "Quand je dors moins de 6h, mes émotions virent vers l'inquiétude le soir.",
   "Si je commence par une vraie pause, le reste se déroule plus calmement.",
   "Le perfectionnisme sabote mes journées plus que la fatigue.",

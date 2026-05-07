@@ -113,7 +113,7 @@ export function GalleryClient() {
         </div>
         <h1 className="tab-title">COMPONENTS</h1>
         <p className="tab-subtitle">
-          Tous les primitives, mascottes, icônes et états — pour QA visuelle.
+          Tous les primitives, mascottes, icônes et états, pour QA visuelle.
         </p>
       </header>
 
@@ -146,7 +146,7 @@ export function GalleryClient() {
               marginTop: 12,
             }}
           >
-            Body Inter 15px — la respiration tranquille du journal. Doucement, à ton rythme.
+            Body Inter 15px, la respiration tranquille du journal. Doucement, à ton rythme.
           </div>
           <div
             style={{
@@ -156,7 +156,7 @@ export function GalleryClient() {
               color: "var(--ink)",
             }}
           >
-            Caveat 32px — la voix manuscrite, complice
+            Caveat 32px, la voix manuscrite, complice
           </div>
         </Card>
 
@@ -263,7 +263,7 @@ export function GalleryClient() {
         </div>
 
         {/* PRIMITIVES TYPOGRAPHIQUES */}
-        <SectionLabel num="D">Primitives — typographie</SectionLabel>
+        <SectionLabel num="D">Primitives ·typographie</SectionLabel>
         <Headline>Hand & quotes</Headline>
 
         <IntroHand>
@@ -272,7 +272,7 @@ export function GalleryClient() {
           <span style={{ color: "var(--ink-2)" }}>Avec une seconde ligne d'apaisement.</span>
         </IntroHand>
 
-        <HandNote>« Une note de marge — légèrement inclinée. »</HandNote>
+        <HandNote>« Une note de marge, légèrement inclinée. »</HandNote>
         <HandNote right>« Et une qui penche dans l'autre sens. »</HandNote>
 
         <HLQuote>
@@ -290,7 +290,7 @@ export function GalleryClient() {
         </Retain>
 
         {/* CARDS */}
-        <SectionLabel num="E">Primitives — cards</SectionLabel>
+        <SectionLabel num="E">Primitives ·cards</SectionLabel>
         <Headline>Cartes</Headline>
 
         <Card icon={IconBattery} title="Card simple" sub="Avec une icône et un sous-titre.">
@@ -312,7 +312,7 @@ export function GalleryClient() {
         </CardColor>
 
         {/* FORM PRIMITIVES */}
-        <SectionLabel num="F">Primitives — saisie</SectionLabel>
+        <SectionLabel num="F">Primitives ·saisie</SectionLabel>
         <Headline>Formulaires</Headline>
 
         <Card icon={IconBattery} title="Échelle 1-5">
@@ -381,7 +381,7 @@ export function GalleryClient() {
           <FreeArea
             value={free}
             onChange={setFree}
-            placeholder="L'espace pour écrire — sans contrainte de taille."
+            placeholder="L'espace pour écrire, sans contrainte de taille."
           />
         </Card>
 
@@ -409,7 +409,7 @@ export function GalleryClient() {
           />
         </Card>
 
-        <Card title="Prog3 — pas / mi / fait">
+        <Card title="Prog3 · pas / mi / fait">
           <Prog3 value={prog} onChange={setProg} label="Avancement" />
         </Card>
 
@@ -432,7 +432,7 @@ export function GalleryClient() {
         </Card>
 
         {/* LIST BLOCK */}
-        <SectionLabel num="G">Primitives — listes</SectionLabel>
+        <SectionLabel num="G">Primitives ·listes</SectionLabel>
         <Headline>List block</Headline>
         <ListBlock
           icon={IconCheck}

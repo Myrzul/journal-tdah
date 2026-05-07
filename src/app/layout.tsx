@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Journal TDAH",
   description:
-    "Journal de bord interactif et bienveillant — compagnon du guide Apprivoiser son TDAH.",
+    "Journal de bord interactif et bienveillant, compagnon du guide Apprivoiser son TDAH.",
   icons: { icon: "/favicon.ico" },
   robots: { index: false, follow: false },
 };

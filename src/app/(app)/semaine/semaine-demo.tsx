@@ -141,7 +141,7 @@ export function SemaineDemo() {
       </HLQuote>
 
       <Retain
-        title="ON NE GAGNE PAS UNE SEMAINE — ON LA TRAVERSE."
+        title="ON NE GAGNE PAS UNE SEMAINE. ON LA TRAVERSE."
         monster={MonsterReflexif}
       >
         Le but n'est pas de cocher toutes les cases. C'est de remarquer celles qui

@@ -27,7 +27,7 @@ export function HubHeader() {
         DE BORD
       </h1>
       <p className="tab-subtitle">
-        Tout ce que tu as posé — d'un seul regard. Pas un score. Un miroir.
+        Tout ce que tu as posé d'un seul regard. Pas un score. Un miroir.
       </p>
 
       <motion.div

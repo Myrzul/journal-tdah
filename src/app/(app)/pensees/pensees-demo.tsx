@@ -48,7 +48,7 @@ export function PenseesDemo() {
         Pose-la,<br />
         <span className="accent">examine-la</span>
       </Headline>
-      <Card icon={IconCloud} title="La pensée — telle qu'elle est">
+      <Card icon={IconCloud} title="La pensée, telle qu'elle est">
         <FreeArea
           value={thought}
           onChange={setThought}
