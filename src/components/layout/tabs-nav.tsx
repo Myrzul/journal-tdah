@@ -53,13 +53,14 @@ export function TabsNav({ current }: TabsNavProps) {
             className={cn("tab-btn", isOn && "on")}
             style={{ ["--tab-color" as string]: it.cssColor }}
             aria-current={isOn ? "page" : undefined}
+            aria-label={it.label}
+            title={it.label}
           >
             <Ic
-              size={22}
+              size={24}
               color={isOn ? it.hex : "var(--ink-2)"}
               stroke={isOn ? 2.4 : 2}
             />
-            <span className="tab-label">{it.label}</span>
           </Link>
         );
       })}

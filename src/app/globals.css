@@ -296,7 +296,7 @@ textarea {
 }
 
 /* =================================================================
-   TABS NAV — bottom navigation mobile-first
+   TABS NAV — bottom navigation minimaliste (icônes seules)
    ================================================================= */
 .tabs-nav {
   position: fixed;
@@ -308,32 +308,21 @@ textarea {
   border-top: 2px solid var(--ink);
   display: flex;
   gap: 0;
-  padding: 4px 0 calc(4px + env(safe-area-inset-bottom));
+  padding: 0 0 env(safe-area-inset-bottom);
   box-shadow: 0 -6px 18px -8px rgba(15, 15, 20, 0.18);
 }
 
 .tab-btn {
   flex: 1;
   min-width: 0;
+  height: 56px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  padding: 8px 2px 6px;
-  border-top: 2px solid transparent;
-  border-bottom: 0;
-  font-family: var(--font-cond);
-  font-weight: 700;
-  font-size: 9.5px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  position: relative;
   color: var(--ink-2);
   text-decoration: none;
-  transition:
-    color 0.15s,
-    border-color 0.15s,
-    background 0.15s;
+  transition: color 0.15s, background 0.15s;
 }
 .tab-btn:hover {
   color: var(--ink);
@@ -341,27 +330,27 @@ textarea {
 }
 .tab-btn.on {
   color: var(--ink);
-  border-top-color: var(--tab-color, var(--dominant));
-  background: color-mix(in oklab, var(--tab-color, var(--dominant)) 8%, white);
 }
-.tab-btn .tab-label {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+/* Indicateur d'onglet actif : barre haute colorée 3px */
+.tab-btn.on::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 3px;
+  background: var(--tab-color, var(--dominant));
+  border-radius: 0 0 3px 3px;
 }
 
 @media (min-width: 768px) {
   .tabs-nav {
-    padding: 6px 24px calc(6px + env(safe-area-inset-bottom));
     justify-content: center;
     gap: 4px;
   }
   .tab-btn {
-    flex: 0 1 100px;
-    padding: 10px 6px 8px;
-    font-size: 11px;
-    gap: 4px;
+    flex: 0 1 72px;
+    height: 64px;
   }
 }
 
@@ -371,8 +360,8 @@ textarea {
 .page-shell {
   background: var(--paper);
   min-height: 60vh;
-  /* Réserve la place de la bottom nav fixed (~76px) + safe-area iOS */
-  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  /* Réserve la place de la bottom nav fixed (56px) + safe-area iOS */
+  padding-bottom: calc(56px + env(safe-area-inset-bottom));
 }
 .page {
   max-width: 800px;
