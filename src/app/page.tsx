@@ -77,7 +77,6 @@ export default function HubPage() {
   return (
     <>
       <HubHeader />
-      <TabsNav current={null} />
 
       <main className="page-shell">
         <div className="page">
@@ -235,9 +234,10 @@ export default function HubPage() {
             de douceur.
           </Retain>
         </div>
+        <AppFooter />
       </main>
 
-      <AppFooter />
+      <TabsNav current={null} />
     </>
   );
 }

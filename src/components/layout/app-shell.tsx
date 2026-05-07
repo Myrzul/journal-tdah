@@ -24,13 +24,13 @@ export function AppShell({ children }: { children: ReactNode }) {
     <>
       <DominantTabSetter tab={tabId} />
       <AppHeader tabId={tabId} />
-      <TabsNav current={tabId} />
       <main className="page-shell">
         <div className="page" key={tabId}>
           {children}
         </div>
+        <AppFooter />
       </main>
-      <AppFooter />
+      <TabsNav current={tabId} />
     </>
   );
 }

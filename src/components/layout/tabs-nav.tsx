@@ -1,30 +1,65 @@
 "use client";
 
 import Link from "next/link";
+import { IconHome, type IconComponent } from "@/components/icons";
 import { cn } from "@/lib/utils/cn";
 import { TABS, type TabId } from "./tabs-config";
 
 type TabsNavProps = {
+  /** L'ID de l'onglet courant. `null` = on est sur le hub (`/`). */
   current: TabId | null;
 };
 
+type NavItem = {
+  href: string;
+  id: TabId | "hub";
+  label: string;
+  icon: IconComponent;
+  cssColor: string;
+  hex: string;
+};
+
+const HUB_ITEM: NavItem = {
+  href: "/",
+  id: "hub",
+  label: "Accueil",
+  icon: IconHome,
+  cssColor: "var(--ch-evolution)",
+  hex: "#14B8A6",
+};
+
 export function TabsNav({ current }: TabsNavProps) {
+  const items: NavItem[] = [
+    HUB_ITEM,
+    ...TABS.map((t) => ({
+      href: `/${t.id}`,
+      id: t.id,
+      label: t.label,
+      icon: t.icon,
+      cssColor: t.cssColor,
+      hex: t.hex,
+    })),
+  ];
+
   return (
-    <nav className="tabs-nav" aria-label="Sections du journal">
-      {TABS.map((t) => {
-        const Ic = t.icon;
-        const on = t.id === current;
+    <nav className="tabs-nav" aria-label="Navigation principale">
+      {items.map((it) => {
+        const Ic = it.icon;
+        const isOn = it.id === "hub" ? current === null : it.id === current;
         return (
           <Link
-            key={t.id}
-            href={`/${t.id}`}
-            className={cn("tab-btn", on && "on")}
-            style={{ ["--tab-color" as string]: t.cssColor }}
-            aria-current={on ? "page" : undefined}
+            key={it.id}
+            href={it.href}
+            className={cn("tab-btn", isOn && "on")}
+            style={{ ["--tab-color" as string]: it.cssColor }}
+            aria-current={isOn ? "page" : undefined}
           >
-            <span className="tab-dot" style={{ background: t.hex }} />
-            <Ic size={14} color={on ? "var(--ink)" : "var(--ink-2)"} />
-            <span>{t.label}</span>
+            <Ic
+              size={22}
+              color={isOn ? it.hex : "var(--ink-2)"}
+              stroke={isOn ? 2.4 : 2}
+            />
+            <span className="tab-label">{it.label}</span>
           </Link>
         );
       })}
