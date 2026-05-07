@@ -1,13 +1,18 @@
 import type { NextConfig } from "next";
 
-const isDev = process.env.NODE_ENV === "development";
-
+/**
+ * CSP : on autorise 'unsafe-inline' et 'unsafe-eval' pour les scripts.
+ * Next.js App Router injecte des scripts inline pour sérialiser les données
+ * RSC vers le client. Sans 'unsafe-inline', l'hydration tombe silencieusement.
+ *
+ * TODO phase 7 (sécurité) : passer à un CSP avec nonces via middleware Next.js
+ * pour retirer 'unsafe-inline'. Pas urgent au MVP, plus complexe à mettre en
+ * place et à maintenir avec les Server Components.
+ */
 const ContentSecurityPolicy = [
   "default-src 'self'",
-  // Next + Tailwind dev needs inline styles; in dev we relax style-src.
-  `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
-  // Scripts: self only (Next will hash inline scripts in prod). Allow eval in dev for HMR.
-  `script-src 'self'${isDev ? " 'unsafe-eval' 'unsafe-inline'" : ""}`,
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https://*.neon.tech https://*.vercel.app https://*.sentry.io ws://localhost:* http://localhost:*",
