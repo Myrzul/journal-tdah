@@ -43,9 +43,9 @@ export function ListesDemo() {
   return (
     <>
       <IntroHand>
-        Sortir de la tête.
+        Mes listes, sur la page.
         <br />
-        <span style={{ color: "var(--ink-2)" }}>Mettre sur la page. Respirer.</span>
+        <span style={{ color: "var(--ink-2)" }}>Sortir de la tête. Respirer.</span>
       </IntroHand>
 
       <SectionLabel num="•">Vider la tête</SectionLabel>

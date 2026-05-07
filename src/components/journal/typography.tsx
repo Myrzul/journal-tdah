@@ -29,7 +29,13 @@ export function HandNote({ children, right }: { children: ReactNode; right?: boo
 }
 
 export function IntroHand({ children }: { children: ReactNode }) {
-  return <div className="intro-hand">{children}</div>;
+  // Wrapper interne : sans ça, les text nodes / <br/> / <span> deviennent
+  // chacun un flex item séparé et s'affichent en colonnes côte à côte.
+  return (
+    <div className="intro-hand">
+      <div className="intro-hand-text">{children}</div>
+    </div>
+  );
 }
 
 export function HLQuote({ children }: { children: ReactNode }) {

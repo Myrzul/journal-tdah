@@ -410,14 +410,6 @@ textarea {
   justify-content: center;
   flex-shrink: 0;
 }
-.section-label::after {
-  content: "";
-  flex: 1;
-  height: 2px;
-  background: var(--ink);
-  max-width: 100px;
-}
-
 .section-headline {
   font-family: var(--font-display);
   font-size: clamp(28px, 5vw, 38px);
@@ -545,6 +537,10 @@ textarea {
   border-radius: 3px;
   margin-top: 6px;
 }
+.intro-hand-text {
+  flex: 1;
+  min-width: 0;
+}
 
 /* =================================================================
    "À RETENIR" full-bleed bloc
@@ -554,7 +550,8 @@ textarea {
   color: white;
   border: 2px solid var(--ink);
   border-radius: var(--r-3xl);
-  padding: 36px 32px;
+  /* padding-top large : laisse de la place au ribbon "À RETENIR" qui pend du haut */
+  padding: 64px 32px 36px;
   margin: 48px 0 16px;
   position: relative;
   overflow: hidden;

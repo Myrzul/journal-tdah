@@ -36,10 +36,10 @@ export function PenseesDemo() {
   return (
     <>
       <IntroHand>
-        Quand ça tourne en boucle,
+        Mes pensées, en passage.
         <br />
         <span style={{ color: "var(--ink-2)" }}>
-          écris-le. La page, elle, ne juge pas.
+          La page ne juge pas. Elle accueille.
         </span>
       </IntroHand>
 

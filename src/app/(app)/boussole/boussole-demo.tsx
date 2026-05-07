@@ -40,9 +40,9 @@ export function BoussoleDemo() {
   return (
     <>
       <IntroHand>
-        Pas un plan de vie.
+        Ma boussole, là où je vais.
         <br />
-        <span style={{ color: "var(--ink-2)" }}>Une direction. Une orientation.</span>
+        <span style={{ color: "var(--ink-2)" }}>Pas un plan. Une direction.</span>
       </IntroHand>
 
       <SectionLabel num="1">Mes valeurs</SectionLabel>

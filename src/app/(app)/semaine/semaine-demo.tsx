@@ -56,7 +56,7 @@ export function SemaineDemo() {
   return (
     <>
       <IntroHand>
-        Une semaine, c'est plus utile qu'une journée.
+        Ma semaine, d'un seul regard.
         <br />
         <span style={{ color: "var(--ink-2)" }}>Le motif émerge dans la durée.</span>
       </IntroHand>
