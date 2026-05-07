@@ -3,6 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import type { LevelN } from "@/lib/tools/thermo-data";
 
+// Touch listeners attachés en natif sur le SVG (pas via React) car
+// React met touchmove en passive: true par défaut, ce qui interdit
+// preventDefault() et laisse le scroll de la page intercepter le drag.
+// Avec passive: false on peut bloquer le scroll pendant le drag tactile.
+
 type Props = {
   level: LevelN | null;
   /** Couleur des bras et hands (sur fond coloré, blanc) */
@@ -65,34 +70,73 @@ export function ThermoVisual({
   const animFillRatio = animLvl / 5;
   const fillTop = tubeBot - animFillRatio * tubeH;
 
-  const compute = (clientY: number): LevelN => {
-    if (!ref.current) return 1;
-    const rect = ref.current.getBoundingClientRect();
-    const yLocal = (clientY - rect.top) * (H / rect.height);
-    const ratio = Math.max(0, Math.min(1, (tubeBot - yLocal) / tubeH));
-    const n = Math.max(1, Math.min(5, Math.round(ratio * 5 + 0.0001)));
-    return n as LevelN;
-  };
+  // Ref vers le dernier onPick fourni : le useEffect qui attache les listeners
+  // ne se re-bind pas à chaque render même si le parent recrée pickLevel.
+  const onPickRef = useRef(onPick);
+  useEffect(() => {
+    onPickRef.current = onPick;
+  }, [onPick]);
 
-  // Pointer Events : un seul API pour souris + tactile + stylet,
-  // setPointerCapture évite la perte du drag quand le doigt sort de l'élément.
-  const onPointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    dragging.current = true;
-    onPick(compute(e.clientY));
-  };
+  // Native touch + mouse listeners sur le SVG.
+  useEffect(() => {
+    const svg = ref.current;
+    if (!svg) return;
 
-  const onPointerMove = (e: React.PointerEvent<SVGSVGElement>) => {
-    if (!dragging.current) return;
-    onPick(compute(e.clientY));
-  };
+    const compute = (clientY: number): LevelN => {
+      const rect = svg.getBoundingClientRect();
+      const yLocal = (clientY - rect.top) * (H / rect.height);
+      const ratio = Math.max(0, Math.min(1, (tubeBot - yLocal) / tubeH));
+      const n = Math.max(1, Math.min(5, Math.round(ratio * 5 + 0.0001)));
+      return n as LevelN;
+    };
 
-  const onPointerUp = (e: React.PointerEvent<SVGSVGElement>) => {
-    dragging.current = false;
-    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    }
-  };
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      dragging.current = true;
+      onPickRef.current(compute(touch.clientY));
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!dragging.current) return;
+      // Bloque le scroll de la page pendant le drag — passive: false requis.
+      e.preventDefault();
+      const touch = e.touches[0];
+      if (touch) onPickRef.current(compute(touch.clientY));
+    };
+    const handleTouchEnd = () => {
+      dragging.current = false;
+    };
+
+    const handleMouseDown = (e: MouseEvent) => {
+      dragging.current = true;
+      onPickRef.current(compute(e.clientY));
+    };
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!dragging.current) return;
+      onPickRef.current(compute(e.clientY));
+    };
+    const handleMouseUp = () => {
+      dragging.current = false;
+    };
+
+    svg.addEventListener("touchstart", handleTouchStart, { passive: false });
+    svg.addEventListener("touchmove", handleTouchMove, { passive: false });
+    svg.addEventListener("touchend", handleTouchEnd);
+    svg.addEventListener("touchcancel", handleTouchEnd);
+    svg.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      svg.removeEventListener("touchstart", handleTouchStart);
+      svg.removeEventListener("touchmove", handleTouchMove);
+      svg.removeEventListener("touchend", handleTouchEnd);
+      svg.removeEventListener("touchcancel", handleTouchEnd);
+      svg.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   // breathing scale on head
   const breathSpeed = 0.04 + (lvl - 1) * 0.025;
@@ -284,10 +328,6 @@ export function ThermoVisual({
       width="100%"
       height={H}
       viewBox={`0 0 ${W} ${H}`}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
       preserveAspectRatio="xMidYMid meet"
       style={{
         display: "block",
