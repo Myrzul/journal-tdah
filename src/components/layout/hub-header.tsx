@@ -16,11 +16,6 @@ export function HubHeader() {
         </div>
       </div>
 
-      <div className="header-eyebrow">
-        <span>00</span>
-        <span>·</span>
-        <span>Tableau de bord</span>
-      </div>
       <h1 className="tab-title">
         TABLEAU
         <br />
