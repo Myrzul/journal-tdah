@@ -9,21 +9,14 @@ import { cn } from "@/lib/utils/cn";
 export type DayState = {
   hasMorning: boolean;
   hasEvening: boolean;
-  /** intensité moyenne [1..5], pilote l'opacité du dot */
-  intensity?: number;
 };
 
 type CalendarHeatmapProps = {
   /** Map<YYYY-MM-DD, DayState> */
   states: Map<string, DayState>;
-  /** Mois initialement affiché (par défaut : courant) */
   initialMonth?: Date;
-  /** Date considérée comme "aujourd'hui" — par défaut Date courante */
   today?: Date;
-  /**
-   * Préfixe de lien — la date ISO sera appendée. Ex : "/matin?date="
-   * → produit "/matin?date=2026-05-07". Si absent, les cellules ne sont pas cliquables.
-   */
+  /** Préfixe — la date ISO sera appendée (ex: "/matin?date=") */
   hrefBase?: string;
 };
 
@@ -48,6 +41,9 @@ export function CalendarHeatmap({
     return addDays(monthStart, dayNum - 1);
   });
 
+  const monthLabel = format(cursor, "MMMM yyyy", { locale: fr });
+  const monthLabelCap = monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1);
+
   return (
     <div className="cal">
       <div className="cal-head">
@@ -59,7 +55,7 @@ export function CalendarHeatmap({
         >
           ‹
         </button>
-        <div className="cal-title">{format(cursor, "MMMM yyyy", { locale: fr })}</div>
+        <div className="cal-title">{monthLabelCap}</div>
         <button
           type="button"
           className="cal-nav"
@@ -72,7 +68,7 @@ export function CalendarHeatmap({
 
       <div className="cal-grid">
         {DAY_LABELS.map((d, i) => (
-          <div key={`${d}-${i}`} className="cal-dlabel">
+          <div key={`dlabel-${i}`} className="cal-dlabel">
             {d}
           </div>
         ))}
@@ -83,15 +79,24 @@ export function CalendarHeatmap({
           const isToday = iso === todayISO;
           const isFuture = d > today;
           const isOtherMonth = !isSameMonth(d, cursor);
-          const fillIntensity = state?.intensity ?? 0;
-          const opacity = state ? 0.45 + (fillIntensity / 5) * 0.55 : 0;
 
           const content = (
             <>
-              {state?.hasMorning && <span className="cal-half cal-half-am" style={{ opacity }} />}
-              {state?.hasEvening && <span className="cal-half cal-half-pm" style={{ opacity }} />}
               <span className="cal-num">{d.getDate()}</span>
+              {!isFuture && (
+                <span className="cal-dots">
+                  <span className={cn("cal-dot am", state?.hasMorning && "filled")} />
+                  <span className={cn("cal-dot pm", state?.hasEvening && "filled")} />
+                </span>
+              )}
             </>
+          );
+
+          const className = cn(
+            "cal-cell",
+            isToday && "today",
+            isOtherMonth && "other-month",
+            isFuture && "future",
           );
 
           if (hrefBase && !isFuture) {
@@ -99,12 +104,7 @@ export function CalendarHeatmap({
               <Link
                 key={iso}
                 href={`${hrefBase}${iso}`}
-                className={cn(
-                  "cal-cell",
-                  isToday && "today",
-                  isOtherMonth && "other-month",
-                  state && "filled",
-                )}
+                className={className}
                 aria-label={format(d, "d MMMM yyyy", { locale: fr })}
               >
                 {content}
@@ -112,16 +112,7 @@ export function CalendarHeatmap({
             );
           }
           return (
-            <div
-              key={iso}
-              className={cn(
-                "cal-cell",
-                isToday && "today",
-                isOtherMonth && "other-month",
-                isFuture && "future",
-                state && "filled",
-              )}
-            >
+            <div key={iso} className={className}>
               {content}
             </div>
           );
@@ -137,9 +128,9 @@ export function CalendarHeatmap({
           <span className="cal-legend-dot pm" />
           soir
         </span>
-        <span className="cal-legend-item">
-          <span className="cal-legend-dot today" />
-          aujourd'hui
+        <span className="cal-legend-item cal-legend-empty">
+          <span className="cal-legend-dot empty" />
+          pas rempli
         </span>
       </div>
     </div>

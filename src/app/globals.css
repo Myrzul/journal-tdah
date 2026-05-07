@@ -1207,133 +1207,75 @@ label.flabel {
 }
 
 /* =================================================================
-   HUB — header sobre + sections
+   HUB — sections, tiles, valeurs
    ================================================================= */
-.hub-header {
-  background: var(--paper);
-  padding: 32px 24px 16px;
-  position: relative;
-  border-bottom: 1.5px solid var(--divider);
-}
-.hub-header .brand-row {
-  margin-bottom: 24px;
-}
-.hub-header .brand-eyebrow,
-.hub-header .brand-title {
-  color: var(--ink);
-}
-.hub-header .brand-eyebrow {
-  opacity: 0.6;
-}
-.hub-date {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 6vw, 44px);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-.hub-greeting {
-  font-family: var(--font-hand);
-  font-size: clamp(22px, 4vw, 28px);
-  color: var(--ink-2);
-  line-height: 1.2;
-}
-@media (min-width: 768px) {
-  .hub-header {
-    padding: 56px 64px 24px;
-  }
-}
 
-.hub-section-title {
-  font-family: var(--font-cond);
-  font-weight: 800;
-  font-size: 11px;
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
-  color: var(--ink-2);
-  margin: 36px 0 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.hub-section-title:first-child {
-  margin-top: 0;
-}
-.hub-section-title::after {
-  content: "";
-  flex: 1;
-  height: 1.5px;
-  background: var(--divider);
-}
-
-.hub-card {
-  background: var(--surface);
-  border: 2px solid var(--ink);
-  border-radius: var(--r-2xl);
-  padding: 22px 24px;
-  margin-bottom: 12px;
-}
-
-.hub-today-row {
+/* Tile cliquable matin/soir dans la card "Mon matin" / "Mon soir" */
+.hub-tile-row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 12px;
 }
-.hub-today-tile {
+.hub-tile {
   flex: 1;
-  min-width: 130px;
+  min-width: 180px;
   border: 2px solid var(--ink);
   border-radius: var(--r-lg);
-  padding: 14px 16px;
-  background: white;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-cond);
   font-weight: 800;
   font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: var(--ink);
   text-decoration: none;
-  transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+  background: white;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
 }
-.hub-today-tile:hover {
+.hub-tile:hover {
   transform: translate(-2px, -2px);
   box-shadow: var(--shadow-mono);
 }
-.hub-today-tile.done {
-  background: var(--dominant-softer);
+.hub-tile.done {
+  background: color-mix(in oklab, var(--ch-controle) 12%, white);
 }
-.hub-today-tile .state-dot {
-  width: 12px;
-  height: 12px;
+.hub-tile.todo {
+  background: white;
+}
+.hub-tile-state {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 2px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
   flex-shrink: 0;
+  background: white;
 }
-.hub-today-tile.done .state-dot {
+.hub-tile.done .hub-tile-state {
   background: var(--ch-controle);
-}
-.hub-today-tile .arrow {
-  margin-left: auto;
-  font-size: 18px;
+  color: white;
 }
 
-.hub-intent {
+/* Citation manuscrite de l'intention dans la card du matin */
+.hub-intent-quote {
   font-family: var(--font-hand);
   font-size: 22px;
   line-height: 1.3;
   color: var(--ink);
-  margin-top: 14px;
+  margin-top: 16px;
   padding-left: 14px;
   border-left: 4px solid var(--ch-observer);
 }
 
+/* Chips des 3 valeurs */
 .hub-values {
   display: flex;
   gap: 8px;
@@ -1341,7 +1283,7 @@ label.flabel {
   margin-top: 6px;
 }
 .hub-value-chip {
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: var(--r-pill);
   border: 2px solid var(--ink);
   background: white;
@@ -1349,49 +1291,49 @@ label.flabel {
   font-weight: 800;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
+
+/* Liste des envies de saison */
 .hub-envies {
   margin-top: 12px;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--ink);
+  padding-left: 0;
 }
 .hub-envies li {
   list-style: none;
-  padding-left: 18px;
+  padding-left: 22px;
   position: relative;
 }
 .hub-envies li::before {
   content: "→";
   position: absolute;
   left: 0;
+  top: 0;
   color: var(--ch-temps);
   font-weight: 800;
+  font-family: var(--font-display);
 }
 
-.hub-quote-card {
-  background: var(--surface);
-  border: 2px solid var(--ink);
-  border-radius: var(--r-2xl);
-  padding: 20px 24px;
-  margin-bottom: 12px;
-  position: relative;
-}
-.hub-quote-card .quote-eyebrow {
+/* Petit lien "modifier ma boussole →" */
+.hub-card-link {
+  display: inline-block;
+  margin-top: 14px;
   font-family: var(--font-cond);
   font-weight: 800;
-  font-size: 10px;
-  letter-spacing: var(--tracking-eyebrow);
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-2);
-  margin-bottom: 8px;
-}
-.hub-quote-card .quote-text {
-  font-family: var(--font-hand);
-  font-size: 22px;
-  line-height: 1.3;
   color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--ch-temps);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+.hub-card-link:hover {
+  opacity: 0.7;
 }
 
 /* =================================================================
@@ -1449,19 +1391,20 @@ label.flabel {
 .cal-cell {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 8px;
-  border: 1.5px solid transparent;
+  border-radius: 10px;
+  border: 1.5px solid var(--divider);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 5px 4px 4px;
   font-family: var(--font-cond);
   font-weight: 700;
   font-size: 12px;
   color: var(--ink);
   background: white;
   text-decoration: none;
-  overflow: hidden;
-  transition: transform 0.12s;
+  transition: transform 0.12s, border-color 0.12s, background 0.12s;
 }
 .cal-cell.empty {
   background: transparent;
@@ -1470,53 +1413,73 @@ label.flabel {
 .cal-cell.future {
   color: var(--muted);
   background: transparent;
+  border-color: transparent;
 }
 .cal-cell.other-month {
   opacity: 0.4;
 }
-.cal-cell.filled {
-  border-color: var(--ink);
-}
 .cal-cell.today {
-  outline: 2px solid var(--dominant);
-  outline-offset: 2px;
+  border-color: var(--ink);
+  border-width: 2px;
+  background: var(--dominant-softer);
 }
 a.cal-cell:hover {
-  transform: scale(1.06);
+  transform: translate(-1px, -1px);
+  border-color: var(--ink);
+  background: var(--paper);
+}
+a.cal-cell.today:hover {
+  background: var(--dominant-soft);
 }
 
-.cal-half {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.cal-half-am {
-  background: var(--ch-observer);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-.cal-half-pm {
-  background: var(--ch-soin);
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
 .cal-num {
-  position: relative;
-  z-index: 2;
-  mix-blend-mode: difference;
-  color: white;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1;
+  color: inherit;
 }
-.cal-cell:not(.filled) .cal-num {
-  mix-blend-mode: normal;
-  color: var(--ink);
+
+.cal-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1px;
 }
-.cal-cell.future .cal-num {
-  color: var(--muted);
+.cal-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+  border: 1.2px solid;
+  opacity: 0.32;
+  flex-shrink: 0;
+}
+.cal-dot.am {
+  border-color: var(--ch-observer);
+}
+.cal-dot.pm {
+  border-color: var(--ch-soin);
+}
+.cal-dot.filled {
+  opacity: 1;
+  border-width: 0;
+  width: 6px;
+  height: 6px;
+}
+.cal-dot.am.filled {
+  background: var(--ch-observer);
+}
+.cal-dot.pm.filled {
+  background: var(--ch-soin);
 }
 
 .cal-legend {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-top: 14px;
+  margin-top: 16px;
   font-family: var(--font-cond);
   font-weight: 700;
   font-size: 10px;
@@ -1530,20 +1493,23 @@ a.cal-cell:hover {
   gap: 6px;
 }
 .cal-legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  border: 1.5px solid var(--ink);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.2px solid;
 }
 .cal-legend-dot.am {
   background: var(--ch-observer);
+  border-color: var(--ch-observer);
 }
 .cal-legend-dot.pm {
   background: var(--ch-soin);
+  border-color: var(--ch-soin);
 }
-.cal-legend-dot.today {
+.cal-legend-dot.empty {
   background: white;
-  box-shadow: 0 0 0 2px var(--dominant);
+  border-color: var(--ink-2);
+  opacity: 0.5;
 }
 
 /* =================================================================

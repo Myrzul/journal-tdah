@@ -1,27 +1,50 @@
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { Umbrella } from "@/components/monsters";
+"use client";
 
-type HubHeaderProps = {
-  today?: Date;
-  greeting?: string;
-};
+import { motion } from "framer-motion";
+import { MonsterReflexif, Umbrella } from "@/components/monsters";
 
-export function HubHeader({ today = new Date(), greeting }: HubHeaderProps) {
-  const dateStr = format(today, "EEEE d MMMM yyyy", { locale: fr });
-  const capitalized = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+const HUB_COLOR_HEX = "#14B8A6"; // --ch-evolution (turquoise)
 
+export function HubHeader() {
   return (
-    <header className="hub-header">
+    <header className="app-header" style={{ background: HUB_COLOR_HEX }}>
       <div className="brand-row">
-        <Umbrella color="var(--ink)" size={42} />
+        <Umbrella color="white" size={42} />
         <div className="brand-text">
           <span className="brand-eyebrow">Pratique d'introspection · TDAH</span>
           <span className="brand-title">JOURNAL TDAH</span>
         </div>
       </div>
-      <h1 className="hub-date">{capitalized}</h1>
-      <p className="hub-greeting">{greeting ?? "Doucement, à ton rythme."}</p>
+
+      <div className="header-eyebrow">
+        <span>00</span>
+        <span>·</span>
+        <span>Tableau de bord</span>
+      </div>
+      <h1 className="tab-title">
+        TABLEAU
+        <br />
+        DE BORD
+      </h1>
+      <p className="tab-subtitle">
+        Tout ce que tu as posé — d'un seul regard. Pas un score. Un miroir.
+      </p>
+
+      <motion.div
+        className="header-mascot"
+        initial={{ y: 0, rotate: 0 }}
+        animate={{
+          y: [0, -14, 0],
+          rotate: [0, -6, 4, 0],
+        }}
+        transition={{ duration: 0.7, ease: "easeInOut" }}
+      >
+        <MonsterReflexif color="white" />
+      </motion.div>
+
+      <div className="umbrella-pill">
+        <Umbrella color={HUB_COLOR_HEX} number={0} />
+      </div>
     </header>
   );
 }
