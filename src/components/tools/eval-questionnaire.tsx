@@ -385,15 +385,20 @@ function DoneScreen() {
     <div className="eval-card">
       <h2 className="eval-done-title">Évaluation enregistrée.</h2>
       <p className="eval-done-sub">
-        Merci d'avoir pris le temps. Tes réponses sont sauvegardées localement.
+        Merci d'avoir pris le temps. Tes réponses sont sauvegardées sur ton appareil.
       </p>
       <p className="eval-done-meta">
-        La page de résultats détaillée arrive en session 2 (graphiques, niveaux par rubrique,
-        export PDF).
+        Découvre maintenant ton profil détaillé : scores par rubrique, vue radar et accroches
+        vers les chapitres du guide pour les domaines en priorité.
       </p>
-      <Link href="/outils" className="eval-btn-primary eval-btn-large">
-        Retour aux outils
-      </Link>
+      <div className="eval-resume-actions">
+        <Link href="/outils/evaluation/resultats" className="eval-btn-primary eval-btn-large">
+          Voir mes résultats →
+        </Link>
+        <Link href="/outils" className="eval-btn-ghost">
+          Retour aux outils
+        </Link>
+      </div>
     </div>
   );
 }

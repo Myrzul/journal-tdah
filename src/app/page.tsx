@@ -27,6 +27,7 @@ import { AppFooter } from "@/components/layout/app-footer";
 import { HubHeader } from "@/components/layout/hub-header";
 import { TabsNav } from "@/components/layout/tabs-nav";
 import { MonsterReflexif } from "@/components/monsters";
+import { EvalHubSuggestion } from "@/components/tools/eval-hub-suggestion";
 import { emotionCountsLastDays, generateMockData, getMorningsInRange } from "@/lib/mock/seed";
 
 const VALUE_LABELS: Record<string, string> = {
@@ -142,6 +143,9 @@ export default function HubPage() {
           </Card>
 
           <HandNote>« Le journal n'attend rien. Il est juste là. »</HandNote>
+
+          {/* Carte de suggestion d'auto-évaluation (s'affiche si jamais ou >90j) */}
+          <EvalHubSuggestion />
 
           {/* ============ CALENDRIER ============ */}
           <SectionLabel num="2">Mes 30 derniers jours</SectionLabel>
