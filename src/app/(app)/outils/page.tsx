@@ -60,6 +60,15 @@ const TOOLS: Tool[] = [
     mascot: MonsterFier,
   },
   {
+    href: "/outils/coherence",
+    eyebrow: "Régulation respiratoire",
+    title: "Cohérence cardiaque",
+    sub: "5 secondes inspire, 5 secondes expire — la fleur t'accompagne pendant 3, 5 ou 10 min.",
+    duration: "3, 5 ou 10 min",
+    color: "var(--ch-emotions)",
+    mascot: MonsterCalme,
+  },
+  {
     href: "/outils/duree",
     eyebrow: "Cécité au temps",
     title: "Estimer une durée",
