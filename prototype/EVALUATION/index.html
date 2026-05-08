@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-évaluation TDAH | @le.neuropsy</title>
+    <meta name="description" content="Outil d'auto-évaluation psychoéducatif du TDAH - Évaluez vos symptômes et leur impact fonctionnel">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo-area">
+                <img src="assets/logo.png" alt="Logo TDAH" class="logo" onerror="this.style.display='none'">
+                <span class="logo-text">Auto-évaluation TDAH</span>
+            </div>
+            <nav class="header-nav">
+                <button class="nav-btn" id="btn-home" onclick="navigateTo('home')" title="Accueil">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </button>
+                <button class="nav-btn" id="btn-history" onclick="navigateTo('history')" title="Historique">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-container" id="progress-container" style="display:none;">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="progress-text" id="progress-text">0%</span>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- PAGE: ACCUEIL -->
+        <section class="page" id="page-home">
+            <!-- Hero avec image -->
+            <div class="card welcome-card">
+                <div class="welcome-hero">
+                    <img src="assets/guide-01.png" alt="S'observer pour se comprendre" class="welcome-hero-img" onerror="this.style.display='none'">
+                </div>
+                <h1>Questionnaire d'auto-évaluation du TDAH</h1>
+                <p class="welcome-subtitle">Explorez votre fonctionnement attentionnel et exécutif</p>
+
+                <div class="info-box info-disclaimer">
+                    <div class="info-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E67E22" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div>
+                        <strong>Avertissement important</strong>
+                        <p>Cet outil d'auto-évaluation a une visée psychoéducative et d'orientation vers des stratégies concrètes. Il ne constitue en aucun cas un diagnostic médical. Les scores sont des repères pour observer votre fonctionnement et votre progression, non pour poser un diagnostic clinique. Pour un accompagnement professionnel, consultez un&middot;e professionnel&middot;le de santé qualifié&middot;e.</p>
+                    </div>
+                </div>
+
+                <div class="info-box info-privacy">
+                    <div class="info-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <div>
+                        <strong>Confidentialité</strong>
+                        <p>Vos données restent strictement confidentielles. Toutes vos réponses sont stockées uniquement sur votre appareil (navigateur), aucune information n'est transmise à un serveur externe. Vous gardez le contrôle total de vos données.</p>
+                    </div>
+                </div>
+
+                <div class="welcome-details">
+                    <div class="detail-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Durée estimée : 15-20 minutes</span>
+                    </div>
+                    <div class="detail-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <span>68 questions au total</span>
+                    </div>
+                    <div class="detail-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+                        <span>Sauvegarde automatique</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-large" onclick="startQuestionnaire()">
+                    Commencer l'évaluation
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+
+                <div id="resume-banner" style="display:none;" class="resume-banner">
+                    <p>Une évaluation est en cours.</p>
+                    <button class="btn btn-secondary" onclick="resumeQuestionnaire()">Reprendre</button>
+                    <button class="btn btn-ghost" onclick="resetCurrent()">Recommencer</button>
+                </div>
+            </div>
+
+            <!-- Aperçu des 10 thématiques du guide -->
+            <div class="card">
+                <h3 class="welcome-section-title">Les 10 thématiques explorées</h3>
+                <p class="welcome-section-desc">Ce questionnaire couvre les dimensions-clés du fonctionnement quotidien. Chaque rubrique est reliée à un chapitre du guide interactif.</p>
+                <div class="welcome-rubriques-grid">
+                    <div class="welcome-rubrique-item" style="border-color:#FF08C3;">
+                        <img src="assets/guide-04.png" alt="Attention et mémoire" onerror="this.style.display='none'">
+                        <span>Attention, mémoire et charge mentale</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#FDD27E;">
+                        <img src="assets/guide-07.png" alt="Organisation" onerror="this.style.display='none'">
+                        <span>Organisation matérielle et environnement</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#FF743E;">
+                        <img src="assets/guide-06.png" alt="Gestion du temps" onerror="this.style.display='none'">
+                        <span>Gestion du temps et planification</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#EE2E63;">
+                        <img src="assets/guide-05.png" alt="Initiation de l'action" onerror="this.style.display='none'">
+                        <span>Initiation de l'action et priorités</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#EE2E63;">
+                        <img src="assets/guide-05.png" alt="Motivation" onerror="this.style.display='none'">
+                        <span>Motivation et engagement</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#FF93D6;">
+                        <img src="assets/guide-03.png" alt="Impulsivité et émotions" onerror="this.style.display='none'">
+                        <span>Impulsivité, émotions et comportements</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#C7A2DE;">
+                        <img src="assets/guide-02.png" alt="Vie quotidienne" onerror="this.style.display='none'">
+                        <span>Vie quotidienne et hygiène de vie</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#C7A2DE;">
+                        <img src="assets/guide-09.png" alt="Travail et études" onerror="this.style.display='none'">
+                        <span>Fonctionnement au travail / études</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#88D8B7;">
+                        <img src="assets/guide-08.png" alt="Interactions sociales" onerror="this.style.display='none'">
+                        <span>Interactions sociales et communication</span>
+                    </div>
+                    <div class="welcome-rubrique-item" style="border-color:#05CF8F;">
+                        <img src="assets/guide-10.png" alt="Bien-être mental" onerror="this.style.display='none'">
+                        <span>Bien-être mental global</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lien guide -->
+            <div class="card welcome-guide-card">
+                <div class="welcome-guide-inner">
+                    <img src="assets/guide-10.png" alt="Guide TDAH" class="welcome-guide-img" onerror="this.style.display='none'">
+                    <div>
+                        <h4>Apprivoiser son TDAH au quotidien</h4>
+                        <p>Découvrez le guide interactif complet avec des stratégies concrètes pour chaque thématique.</p>
+                        <a href="https://symbiosepsychologie.podia.com/guide-interactif-apprivoiser-son-tdah" target="_blank" rel="noopener" class="btn btn-primary">
+                            Découvrir le guide
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sources scientifiques -->
+            <div class="card welcome-sources-card">
+                <p class="sources-text">L'échelle de retentissement est une synthèse intégrative inspirée de plusieurs outils existants. Elle a été conçue comme un outil d'auto-évaluation à visée psychoéducative et d'orientation vers des stratégies concrètes. Elle s'appuie notamment sur l'échelle de retentissement du TDAH de l'adulte (Lopez &amp; Roques, 2018), la <i>Time Management Behavior Scale</i> (Macan et al., 1990), des outils cliniques développés par Susan Young, le <i>Young Adult Routines Inventory</i> (Grinnell et al.), l'échelle WEMWBS (Tennant et al., 2007), la WFIR-S (Weiss, 2000) et la DIVA-5 (Kooij et al., 2019).</p>
+                <p class="sources-text" style="margin-top:10px;">Librement adapté de l'ASRS-v1.1 : Échelle d'autoévaluation des symptômes du TDAH chez l'adulte, Kessler et al., 2005 pour inattention et hyperactivité/impulsivité (18 premières questions).</p>
+            </div>
+        </section>
+
+        <!-- PAGE: QUESTIONNAIRE -->
+        <section class="page" id="page-questionnaire" style="display:none;">
+            <div class="card questionnaire-card">
+                <div class="section-header" id="section-header">
+                    <span class="section-badge" id="section-badge">Étape 1</span>
+                    <h2 id="section-title">Section A : Inattention</h2>
+                    <p id="section-description" class="section-desc"></p>
+                </div>
+
+                <div id="questions-container"></div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" id="btn-prev" onclick="prevSection()" disabled>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        Précédent
+                    </button>
+                    <button class="btn btn-primary" id="btn-next" onclick="nextSection()">
+                        Suivant
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: TRANSITION -->
+        <section class="page" id="page-transition" style="display:none;">
+            <div class="card transition-card">
+                <div class="transition-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <h2 id="transition-title"></h2>
+                <p id="transition-text" class="transition-text"></p>
+                <button class="btn btn-primary btn-large" id="transition-btn" onclick="continueAfterTransition()">
+                    Continuer
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- PAGE: RESULTATS -->
+        <section class="page" id="page-results" style="display:none;">
+            <div id="results-content">
+                <div class="card results-intro-card">
+                    <h2>Vos résultats</h2>
+                    <p class="results-reminder">Rappelez-vous : ces scores peuvent évoluer selon le contexte, le stress, la fatigue. Ils ne vous définissent pas, ils vous aident à vous ajuster. Ces outils sont un point de départ, pas une étiquette.</p>
+                </div>
+
+                <!-- Sévérité des symptômes -->
+                <div class="card">
+                    <h3 class="results-section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        Étape 1 : Sévérité des symptômes
+                    </h3>
+                    <div class="scores-grid">
+                        <div class="score-block" id="score-inattention"></div>
+                        <div class="score-block" id="score-hyperactivite"></div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-symptoms"></canvas>
+                    </div>
+                </div>
+
+                <!-- Répercussions fonctionnelles -->
+                <div class="card">
+                    <h3 class="results-section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Étape 2 : Répercussions fonctionnelles
+                    </h3>
+                    <div class="rubrique-scores" id="rubrique-scores"></div>
+                    <div class="chart-container chart-radar-container">
+                        <canvas id="chart-radar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bien-être -->
+                <div class="card">
+                    <h3 class="results-section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#66BB6A" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        Bien-être mental global
+                    </h3>
+                    <div class="wellbeing-container" id="wellbeing-container"></div>
+                </div>
+
+                <!-- Score total -->
+                <div class="card">
+                    <h3 class="results-section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+                        Score total des répercussions
+                    </h3>
+                    <div id="total-score-container"></div>
+                </div>
+
+                <!-- Priorités -->
+                <div class="card" id="priorities-card" style="display:none;">
+                    <h3 class="results-section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        Mes priorités d'action
+                    </h3>
+                    <p class="priorities-intro">Les rubriques où vos scores sont les plus élevés indiquent par où commencer.</p>
+                    <div id="priorities-list"></div>
+                </div>
+
+                <!-- Actions -->
+                <!-- Guide CTA -->
+                <div class="card" id="guide-link-container"></div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="exportPDF()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Exporter en PDF
+                    </button>
+                    <button class="btn btn-secondary" onclick="saveEvaluation()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Sauvegarder l'évaluation
+                    </button>
+                    <button class="btn btn-ghost" onclick="navigateTo('home')">
+                        Retour à l'accueil
+                    </button>
+                </div>
+
+                <div class="info-box info-disclaimer results-disclaimer">
+                    <p>Cet outil d'auto-évaluation a une visée psychoéducative. Il ne constitue en aucun cas un diagnostic médical. Pour un accompagnement professionnel, consultez un&middot;e professionnel&middot;le de santé qualifié&middot;e.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: HISTORIQUE -->
+        <section class="page" id="page-history" style="display:none;">
+            <div class="card">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2" style="vertical-align:middle;margin-right:8px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Historique des évaluations
+                </h2>
+                <div id="history-list"></div>
+                <div id="history-empty" style="display:none;" class="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#B0BEC5" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <p>Aucune évaluation sauvegardée pour le moment.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('home')">Commencer une évaluation</button>
+                </div>
+            </div>
+            <!-- Graphique d'évolution -->
+            <div class="card" id="evolution-card" style="display:none;">
+                <h3 class="results-section-title">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B8FB9" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Évolution dans le temps
+                </h3>
+                <div class="chart-container">
+                    <canvas id="chart-evolution"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Outil développé par <strong>@le.neuropsy</strong></p>
+        <p>Pour un accompagnement professionnel : <a href="https://symbiosepsychologie.podia.com/guide-interactif-apprivoiser-son-tdah" target="_blank" rel="noopener">Découvrir le guide interactif</a></p>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

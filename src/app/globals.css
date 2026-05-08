@@ -1745,6 +1745,467 @@ label.flabel {
 }
 
 /* =================================================================
+   TOOL CARD — accroche vers un outil dans /outils
+   ================================================================= */
+.tool-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 24px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-2xl);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  margin-bottom: 16px;
+}
+.tool-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-mono);
+  background: var(--paper);
+}
+.tool-card-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.tool-card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tool-card-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.tool-card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.tool-card-sub {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.tool-card-arrow {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ink);
+}
+
+/* =================================================================
+   ÉVAL TDAH — questionnaire
+   ================================================================= */
+.eval-progress {
+  position: sticky;
+  top: 8px;
+  z-index: 30;
+  background: var(--paper);
+  padding: 8px 0 12px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-radius: var(--r-md);
+}
+.eval-progress-bar {
+  height: 8px;
+  background: var(--surface-alt);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.eval-progress-fill {
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.25s ease;
+}
+.eval-progress-text {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: right;
+}
+
+.eval-section-head {
+  margin-bottom: 24px;
+  padding-left: 14px;
+  border-left: 6px solid var(--accent, var(--ink));
+}
+.eval-section-badge {
+  display: inline-block;
+  background: var(--accent, var(--ink));
+  color: white;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.eval-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.eval-section-period {
+  font-family: var(--font-hand);
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.eval-section-intro {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.eval-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.eval-q-card {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 18px 18px 20px;
+  transition: background 0.15s;
+}
+.eval-q-card.answered {
+  background: color-mix(in oklab, var(--surface) 92%, var(--ch-controle) 8%);
+}
+.eval-q-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+.eval-q-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--ink);
+}
+.eval-q-text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.eval-q-text b {
+  font-weight: 700;
+}
+.eval-q-detail {
+  margin: 6px 0 14px 40px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.eval-scale {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+.eval-scale-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px 8px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-md);
+  background: white;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.12s, background 0.12s, color 0.12s;
+}
+.eval-scale-btn:hover {
+  background: var(--paper);
+}
+.eval-scale-btn.on {
+  transform: translate(-1px, -1px);
+}
+.eval-scale-num {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1;
+}
+.eval-scale-label {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.eval-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 24px 0 8px;
+  padding-top: 16px;
+  border-top: 1.5px dashed var(--divider);
+}
+.eval-nav-counter {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.eval-btn-primary {
+  background: var(--ink);
+  color: white;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  padding: 12px 22px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.eval-btn-primary:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-mono);
+}
+.eval-btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.eval-btn-large {
+  padding: 16px 28px;
+  font-size: 14px;
+}
+.eval-btn-secondary {
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  padding: 12px 22px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.eval-btn-secondary:hover:not(:disabled) {
+  background: var(--paper);
+}
+.eval-btn-secondary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.eval-btn-ghost {
+  background: transparent;
+  color: var(--ink-2);
+  border: none;
+  padding: 12px 22px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.eval-btn-ghost:hover {
+  color: var(--ink);
+}
+
+.eval-hint {
+  text-align: center;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.eval-card {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-3xl);
+  padding: 32px 28px;
+  margin-bottom: 16px;
+}
+
+.eval-intro-title,
+.eval-resume-title,
+.eval-trans-title,
+.eval-done-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 5vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.eval-intro-lead,
+.eval-resume-sub,
+.eval-trans-sub,
+.eval-done-sub {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.eval-intro-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 20px 0;
+}
+.eval-intro-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: var(--r-lg);
+}
+.eval-intro-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.eval-intro-step-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.eval-intro-time {
+  font-family: var(--font-hand);
+  font-size: 20px;
+  color: var(--ink-2);
+  margin-bottom: 12px;
+}
+
+.eval-disclaimer {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-2);
+  background: var(--surface-alt);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  margin-bottom: 18px;
+  line-height: 1.55;
+}
+
+.eval-resume-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.eval-trans-period {
+  font-family: var(--font-hand);
+  font-size: 22px;
+  color: var(--ink);
+  padding-left: 14px;
+  border-left: 4px solid var(--ch-emotions);
+  margin-bottom: 18px;
+}
+
+.eval-done-meta {
+  font-size: 13px;
+  color: var(--ink-2);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+  .eval-scale {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+  .eval-scale-btn {
+    padding: 8px 2px;
+  }
+  .eval-scale-num {
+    font-size: 14px;
+  }
+  .eval-scale-label {
+    font-size: 8px;
+  }
+}
+
+/* =================================================================
    RECAP — séparateur entre Semaine et Boussole
    ================================================================= */
 .recap-divider {
