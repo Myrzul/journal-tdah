@@ -15,11 +15,11 @@ export const RUBRIQUES: RubriqueMeta[] = [
     id: "02",
     slug: "02-hygiene-de-vie",
     eyebrow: "Rubrique 02",
-    title: "Hygiène de vie",
+    title: "Prendre soin de soi : hygiène de vie & santé",
     hook: "Sommeil, alimentation, mouvement — la base du fonctionnement.",
     cssColor: "var(--ch-soin)",
     hex: "#B05BC9",
-    available: false,
+    available: true,
   },
   {
     id: "03",

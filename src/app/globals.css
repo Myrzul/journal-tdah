@@ -6221,6 +6221,53 @@ label.flabel {
 }
 
 /* =================================================================
+   GUIDE — encarts d'aide (rubrique 02 et autres)
+   ================================================================= */
+.guide-help-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 18px 0;
+}
+@media (min-width: 720px) {
+  .guide-help-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.guide-help-card {
+  padding: 16px 18px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-lg);
+  color: white;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.guide-help-card-orange {
+  background: var(--ch-temps);
+}
+.guide-help-card-red {
+  background: var(--ch-motivation);
+}
+.guide-help-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.guide-help-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  opacity: 0.96;
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {
