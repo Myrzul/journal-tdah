@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IconEye, IconEyeOpen } from "@/components/icons";
 import { Headline, IntroHand, SectionLabel } from "@/components/journal/typography";
-import { MonsterCalme, MonsterCurieux } from "@/components/monsters";
+import { MonsterCurieux, MonsterReflexif } from "@/components/monsters";
 
 type Tool = {
   href: string;
@@ -34,6 +34,15 @@ const TOOLS: Tool[] = [
     duration: "8 à 12 min",
     color: "var(--ch-attention)",
     icon: IconEyeOpen,
+  },
+  {
+    href: "/outils/scan",
+    eyebrow: "Pleine conscience corporelle",
+    title: "Scan corporel",
+    sub: "Sept phases guidées pour habiter le corps quand le mental bouillonne.",
+    duration: "5 à 10 min",
+    color: "var(--ch-emotions)",
+    mascot: MonsterReflexif,
   },
 ];
 
