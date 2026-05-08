@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { IconEye, IconEyeOpen } from "@/components/icons";
 import { Headline, IntroHand, SectionLabel } from "@/components/journal/typography";
-import { MonsterCurieux, MonsterFier, MonsterReflexif } from "@/components/monsters";
+import {
+  MonsterCalme,
+  MonsterCurieux,
+  MonsterFier,
+  MonsterReflexif,
+} from "@/components/monsters";
 
 type Tool = {
   href: string;
@@ -52,6 +57,15 @@ const TOOLS: Tool[] = [
     duration: "3 à 8 min",
     color: "var(--ch-emotions)",
     mascot: MonsterFier,
+  },
+  {
+    href: "/outils/duree",
+    eyebrow: "Cécité au temps",
+    title: "Estimer une durée",
+    sub: "Comparer ton estimation au temps réel — pour calibrer ton intuition, sans jugement.",
+    duration: "2 min + la tâche",
+    color: "var(--ch-temps)",
+    mascot: MonsterCalme,
   },
 ];
 

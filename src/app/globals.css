@@ -2276,6 +2276,540 @@ label.flabel {
 }
 
 /* =================================================================
+   TIMING — hub (carte d'invitation orange)
+   ================================================================= */
+.timing-hero {
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 28px 24px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.timing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.4px);
+  background-size: 14px 14px;
+}
+.timing-hero-eyebrow,
+.timing-hero-title,
+.timing-hero-text,
+.timing-hero-cta,
+.timing-hero-stat {
+  position: relative;
+}
+.timing-hero-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.timing-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5.5vw, 36px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 8px 0 12px;
+}
+.timing-hero-text {
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 460px;
+}
+.timing-hero-cta {
+  padding: 16px 26px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: white;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 white;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.timing-hero-stat {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.timing-hero-stat-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-hero-stat-value {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+}
+.timing-hero-stat-sub {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* =================================================================
+   TIMING — historique (barres comparatives)
+   ================================================================= */
+.timing-hist-row {
+  padding: 14px 16px;
+  border: 1.5px solid var(--divider);
+  border-radius: 18px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.timing-hist-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.timing-hist-task {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.timing-hist-date {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-hist-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.timing-hist-bar-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 70px;
+  align-items: center;
+  gap: 8px;
+}
+.timing-hist-bar-label {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-hist-bar-track {
+  height: 12px;
+  background: var(--surface-alt);
+  border: 1.4px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+  display: block;
+}
+.timing-hist-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.timing-hist-bar-fill.is-estim {
+  background: var(--ink);
+}
+.timing-hist-bar-val {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-align: right;
+}
+.timing-hist-gap {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.timing-hist-gap.is-under {
+  color: var(--ch-temps);
+}
+.timing-hist-gap.is-over {
+  color: var(--ch-controle);
+}
+.timing-hist-gap.is-equal {
+  color: var(--ink);
+}
+.timing-hist-note {
+  font-family: var(--font-hand);
+  font-size: 17px;
+  line-height: 1.25;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.timing-hist-clear {
+  margin-top: 6px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b5b5bd;
+}
+
+/* =================================================================
+   TIMING — phase saisie (presets + boutons)
+   ================================================================= */
+.timing-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.timing-preset {
+  padding: 12px 18px;
+  background: white;
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition:
+    transform 120ms,
+    box-shadow 120ms,
+    background 120ms;
+}
+.timing-preset:hover,
+.timing-preset:focus-visible {
+  outline: none;
+  background: color-mix(in oklab, var(--ch-temps) 14%, white);
+}
+.timing-preset.is-on {
+  background: var(--ch-temps);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.timing-nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.timing-nav-btn {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  background: white;
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.timing-primary-btn {
+  flex: 1;
+  padding: 14px 20px;
+  background: var(--ch-temps);
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.timing-primary-btn.is-disabled,
+.timing-primary-btn:disabled {
+  background: #e0dcd4;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+/* =================================================================
+   TIMING — phase pendant (zen, tâche en cours)
+   ================================================================= */
+.timing-forgotten-banner {
+  padding: 14px 18px;
+  margin: 0 0 16px;
+  background: color-mix(in oklab, var(--ch-temps) 14%, white);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-lg);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.timing-forgotten-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-forgotten-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-top: 4px;
+}
+.timing-forgotten-sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+.timing-active-card {
+  background: var(--paper);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 32px 24px;
+  margin-bottom: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.timing-active-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-active-estim {
+  font-family: var(--font-display);
+  font-size: 38px;
+  line-height: 1;
+  color: var(--ch-temps);
+  letter-spacing: -0.015em;
+}
+.timing-active-task {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-top: 4px;
+  word-break: break-word;
+}
+.timing-active-since {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 8px;
+}
+
+.timing-finish-btn {
+  width: 100%;
+  padding: 22px 24px;
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition:
+    transform 120ms,
+    box-shadow 120ms;
+}
+.timing-finish-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.timing-secondary-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.timing-ghost-btn {
+  flex: 1;
+  padding: 12px 14px;
+  background: transparent;
+  color: var(--ink-2);
+  border: 1.5px dashed var(--ink-2);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.timing-ghost-btn:hover,
+.timing-ghost-btn:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  outline: none;
+}
+
+.timing-manual-card {
+  margin-top: 16px;
+  padding: 20px 22px;
+  background: white;
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* =================================================================
+   TIMING — phase recap (estimation vs réel, gros)
+   ================================================================= */
+.timing-recap-card {
+  padding: 24px 22px;
+  background: white;
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin-bottom: 16px;
+}
+.timing-recap-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-recap-task {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 28px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 6px 0 18px;
+  word-break: break-word;
+}
+.timing-recap-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.timing-recap-bar-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+.timing-recap-bar-label {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.timing-recap-bar-track {
+  height: 22px;
+  background: var(--surface-alt);
+  border: 1.6px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+  display: block;
+}
+.timing-recap-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.timing-recap-bar-fill.is-estim {
+  background: var(--ink);
+}
+.timing-recap-bar-val {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-top: 2px;
+}
+.timing-recap-gap {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ch-temps);
+  margin-top: 4px;
+}
+.timing-recap-gap.is-over {
+  color: var(--ch-controle);
+}
+.timing-recap-gap.is-equal {
+  color: var(--ink);
+}
+.timing-recap-gap-text {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  text-transform: none;
+}
+.timing-recap-note-hand {
+  font-family: var(--font-hand);
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink-2);
+  margin-top: 14px;
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {
