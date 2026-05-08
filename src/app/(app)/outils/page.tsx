@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IconEye, IconEyeOpen } from "@/components/icons";
 import { Headline, IntroHand, SectionLabel } from "@/components/journal/typography";
-import { MonsterCurieux, MonsterReflexif } from "@/components/monsters";
+import { MonsterCurieux, MonsterFier, MonsterReflexif } from "@/components/monsters";
 
 type Tool = {
   href: string;
@@ -43,6 +43,15 @@ const TOOLS: Tool[] = [
     duration: "5 à 10 min",
     color: "var(--ch-emotions)",
     mascot: MonsterReflexif,
+  },
+  {
+    href: "/outils/emotions",
+    eyebrow: "Granularité émotionnelle",
+    title: "Nommer mes émotions",
+    sub: "Du flou à un mot juste — boussole, familles, nuances. Couches TCC et ACT optionnelles.",
+    duration: "3 à 8 min",
+    color: "var(--ch-emotions)",
+    mascot: MonsterFier,
   },
 ];
 
