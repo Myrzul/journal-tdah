@@ -1,6 +1,6 @@
 "use client";
 
-import { COHERENCE_PINK, CYCLE_PERIOD_MS, formatMmSs } from "@/lib/tools/coherence-data";
+import { COHERENCE_PINK, CYCLE_PERIOD_MS } from "@/lib/tools/coherence-data";
 
 type Props = {
   /** Temps actif écoulé en ms (hors pauses) */
@@ -19,7 +19,6 @@ export function CoherenceFlower({ elapsedMs, durationMs, running }: Props) {
   const eased = ratio < 0.5 ? 2 * ratio * ratio : 1 - (-2 * ratio + 2) ** 2 / 2;
   const bloom = 0.4 + eased * 0.6; // 0.4..1.0
 
-  const remainingSec = Math.max(0, Math.round((durationMs - elapsedMs) / 1000));
   // Compteur 5..1 dans la phase, basé sur la position dans la moitié de cycle
   const phaseRatio = phase === "in" ? cycleProgress * 2 : (cycleProgress - 0.5) * 2;
   const countInPhase = Math.max(1, Math.min(5, Math.ceil((1 - phaseRatio) * 5)));
@@ -90,10 +89,6 @@ export function CoherenceFlower({ elapsedMs, durationMs, running }: Props) {
           {!running ? "PAUSE" : phase === "in" ? "INSPIRE" : "EXPIRE"}
         </div>
         <div className="coherence-tool-count">{running ? countInPhase : "—"}</div>
-      </div>
-
-      <div className="coherence-tool-time">
-        Reste {formatMmSs(remainingSec)}
       </div>
     </div>
   );
