@@ -105,6 +105,15 @@ const TOOLS: Tool[] = [
     color: "var(--ch-attention)",
     mascot: MonsterReflexif,
   },
+  {
+    href: "/outils/journal",
+    eyebrow: "Auto-observation temporelle",
+    title: "Journal du temps",
+    sub: "Capturer son énergie et son humeur sur 2 journées — pour voir la forme réelle de tes patterns, pas l'intuition.",
+    duration: "Saisie au fil de l'eau",
+    color: "var(--ch-observer)",
+    mascot: MonsterCurieux,
+  },
 ];
 
 export default function OutilsPage() {

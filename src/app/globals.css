@@ -4722,6 +4722,503 @@ label.flabel {
 }
 
 /* =================================================================
+   JOURNAL DU TEMPS — communs
+   ================================================================= */
+.journal-nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.journal-nav-btn {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  background: white;
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.journal-primary-btn {
+  flex: 1;
+  padding: 14px 20px;
+  background: var(--ch-observer);
+  color: white;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.journal-delete-btn {
+  margin-top: 4px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px solid var(--ch-motivation);
+  border-radius: 12px;
+  color: var(--ch-motivation);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.journal-editor-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* =================================================================
+   JOURNAL — bibliothèque
+   ================================================================= */
+.journal-empty {
+  padding: 28px 24px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin: 8px 0 18px;
+}
+.journal-empty-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.journal-empty-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 28px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 6px 0 10px;
+}
+.journal-empty-sub {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+.journal-empty-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.journal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 8px 0 14px;
+}
+@media (min-width: 720px) {
+  .journal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.journal-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.journal-card:hover,
+.journal-card:focus-visible {
+  outline: none;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.journal-card-eyebrow {
+  grid-column: 1;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.journal-card-date {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.journal-card-title-text {
+  grid-column: 1;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.journal-card-meta {
+  grid-column: 1;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  text-transform: uppercase;
+}
+.journal-card-arrow {
+  grid-column: 2;
+  grid-row: 1 / span 4;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--ink);
+  align-self: center;
+}
+.journal-grid-add {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.journal-add-btn {
+  padding: 10px 16px;
+  background: transparent;
+  border: 2px dashed var(--ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.journal-add-btn:hover,
+.journal-add-btn:focus-visible {
+  background: color-mix(in oklab, var(--ch-observer) 14%, white);
+  outline: none;
+}
+
+/* =================================================================
+   JOURNAL — éditeur (now card + chart wrap + table)
+   ================================================================= */
+.journal-now-card {
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 24px 22px;
+  color: white;
+  margin-bottom: 16px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.journal-now-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.journal-now-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 28px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 6px 0 8px;
+}
+.journal-now-text {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 14px;
+  max-width: 460px;
+  opacity: 0.92;
+}
+.journal-now-btn {
+  padding: 14px 24px;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+  color: white;
+  border: 2px solid white;
+  box-shadow: 4px 4px 0 white;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.journal-now-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.journal-chart-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.journal-chart-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.journal-chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.journal-chart-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.4px solid var(--ink);
+}
+
+.journal-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--r-lg);
+}
+.journal-table {
+  display: flex;
+  flex-direction: column;
+  border: 1.4px solid var(--ink);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  min-width: 520px;
+}
+.journal-table-headrow {
+  display: grid;
+  grid-template-columns: 80px 1.5fr 1.2fr 36px 36px;
+  gap: 4px;
+  padding: 10px 8px;
+  background: var(--ch-observer);
+  color: white;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.journal-table-th-time,
+.journal-table-th-act,
+.journal-table-th-ctx,
+.journal-table-th-num {
+  padding: 4px;
+}
+.journal-table-th-num {
+  text-align: center;
+}
+.journal-table-row {
+  display: grid;
+  grid-template-columns: 80px 1.5fr 1.2fr 36px 36px;
+  gap: 4px;
+  padding: 8px 8px;
+  align-items: center;
+  background: white;
+  border-top: 1px solid var(--divider);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  width: 100%;
+}
+.journal-table-row:hover,
+.journal-table-row:focus-visible {
+  outline: none;
+  background: color-mix(in oklab, var(--ch-observer) 6%, white);
+}
+.journal-table-row.is-filled {
+  background: color-mix(in oklab, var(--ch-observer) 4%, white);
+}
+.journal-table-row.is-current {
+  border-left: 3px solid var(--ch-observer);
+}
+.journal-table-time {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.journal-table-time-end {
+  font-weight: 600;
+  color: var(--ink-2);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+.journal-table-act,
+.journal-table-ctx {
+  font-family: var(--font-cond);
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.3;
+  word-break: break-word;
+}
+.journal-table-num {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ch-observer);
+}
+.journal-table-empty {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* =================================================================
+   JOURNAL — modal de saisie (snapshot)
+   ================================================================= */
+.journal-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 14, 16, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+@media (min-width: 640px) {
+  .journal-modal-backdrop {
+    align-items: center;
+  }
+}
+.journal-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 22px 22px;
+}
+.journal-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--ink);
+  font-size: 14px;
+  cursor: pointer;
+}
+.journal-modal-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.journal-modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5vw, 26px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 6px 0 14px;
+}
+.journal-modal-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 10px 0;
+}
+@media (min-width: 480px) {
+  .journal-modal-2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.journal-range {
+  width: 100%;
+  height: 14px;
+  margin: 6px 0 0;
+}
+.journal-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.journal-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+.journal-modal-clear {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1.5px solid var(--ink-2);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.journal-modal-save {
+  flex: 1;
+  padding: 14px 20px;
+  color: white;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {
