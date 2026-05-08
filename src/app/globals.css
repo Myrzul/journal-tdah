@@ -1745,71 +1745,111 @@ label.flabel {
 }
 
 /* =================================================================
-   TOOL CARD — accroche vers un outil dans /outils
+   TOOLS GRID — page d'accueil de /outils
    ================================================================= */
-.tool-card {
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (min-width: 720px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+.tool-grid-card {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 22px 24px;
+  padding: 20px 22px;
   border: 2px solid var(--ink);
   border-radius: var(--r-2xl);
   background: var(--surface);
   color: var(--ink);
   text-decoration: none;
   transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
-  margin-bottom: 16px;
 }
-.tool-card:hover {
+.tool-grid-card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-mono);
-  background: var(--paper);
+  box-shadow: 4px 4px 0 var(--accent, var(--ink));
+  background: color-mix(in oklab, var(--accent, var(--ink)) 6%, white);
 }
-.tool-card-icon {
+.tool-grid-card-illu {
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: var(--r-lg);
-  background: var(--paper);
   border: 2px solid var(--ink);
-  display: inline-flex;
+  background: var(--paper);
+  display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  padding: 6px;
 }
-.tool-card-text {
+.tool-grid-card-body {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
-.tool-card-eyebrow {
+.tool-grid-card-eyebrow {
   font-family: var(--font-cond);
   font-weight: 800;
   font-size: 10px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-2);
+  color: var(--accent, var(--ink-2));
 }
-.tool-card-title {
+.tool-grid-card-title {
   font-family: var(--font-display);
   font-size: 16px;
   letter-spacing: -0.005em;
   text-transform: uppercase;
   color: var(--ink);
-  line-height: 1.1;
+  line-height: 1.05;
 }
-.tool-card-sub {
+.tool-grid-card-sub {
   font-size: 13px;
   color: var(--ink-2);
-  line-height: 1.5;
+  line-height: 1.45;
   margin-top: 2px;
 }
-.tool-card-arrow {
+.tool-grid-card-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+.tool-grid-card-arrow {
   flex-shrink: 0;
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 20px;
   color: var(--ink);
+}
+
+.tools-coming {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: center;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 2px dashed var(--divider);
+  border-radius: var(--r-lg);
 }
 
 /* =================================================================

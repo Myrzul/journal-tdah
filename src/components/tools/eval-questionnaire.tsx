@@ -61,6 +61,16 @@ export function EvalQuestionnaire() {
     }
   }, [answers, sectionIndex, phase, startedAt]);
 
+  // Scroll en haut quand on change de section ou de phase. Doit être un useEffect
+  // (pas inline dans goNext) pour s'exécuter après le re-render React qui injecte
+  // la nouvelle section, sinon le scroll se fait sur l'ancienne page.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (phase === "questions" || phase === "transition" || phase === "intro" || phase === "ready") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [sectionIndex, phase]);
+
   const answeredCount = useMemo(() => Object.values(answers).filter((v) => v !== undefined).length, [answers]);
   const progressPct = Math.round((answeredCount / TOTAL_QUESTIONS) * 100);
 
@@ -86,13 +96,11 @@ export function EvalQuestionnaire() {
       return;
     }
     setSectionIndex((i) => i + 1);
-    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const goPrev = () => {
     if (sectionIndex === 0) return;
     setSectionIndex((i) => i - 1);
-    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const startFresh = () => {
@@ -148,8 +156,7 @@ export function EvalQuestionnaire() {
         onContinue={() => {
           setSectionIndex((i) => i + 1);
           setPhase("questions");
-          if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
+              }}
       />
     );
   }

@@ -1,28 +1,85 @@
 import Link from "next/link";
-import { IconEyeOpen } from "@/components/icons";
-import { ThermoTool } from "@/components/tools/thermo-tool";
+import { IconEye, IconEyeOpen } from "@/components/icons";
+import { Headline, IntroHand, SectionLabel } from "@/components/journal/typography";
+import { MonsterCalme, MonsterCurieux } from "@/components/monsters";
+
+type Tool = {
+  href: string;
+  eyebrow: string;
+  title: string;
+  sub: string;
+  duration: string;
+  /** Couleur d'accent — apparaît en bord et fond léger sur hover */
+  color: string;
+  /** Mascotte ou icône */
+  mascot?: React.ComponentType<{ color: string }>;
+  icon?: React.ComponentType<{ size?: number; color?: string }>;
+};
+
+const TOOLS: Tool[] = [
+  {
+    href: "/outils/thermometre",
+    eyebrow: "Auto-régulation",
+    title: "Thermomètre des émotions",
+    sub: "Nommer ce qui se passe maintenant et choisir une réponse à ta taille.",
+    duration: "2 à 5 min",
+    color: "var(--ch-soin)",
+    mascot: MonsterCurieux,
+  },
+  {
+    href: "/outils/evaluation",
+    eyebrow: "Auto-évaluation TDAH",
+    title: "Mes symptômes & leurs répercussions",
+    sub: "68 questions pour observer la fréquence de tes symptômes et leur impact.",
+    duration: "8 à 12 min",
+    color: "var(--ch-attention)",
+    icon: IconEyeOpen,
+  },
+];
 
 export default function OutilsPage() {
   return (
     <>
-      <ThermoTool variant="visual" />
+      <IntroHand>
+        Mes outils, à portée.
+        <br />
+        <span style={{ color: "var(--ink-2)" }}>
+          Choisis-en un quand tu en as besoin. Pas avant.
+        </span>
+      </IntroHand>
 
-      {/* Accroche vers les autres outils — pour l'instant juste l'auto-évaluation.
-          En grandissant, ce bloc deviendra le funnel par intention. */}
-      <Link href="/outils/evaluation" className="tool-card">
-        <span className="tool-card-icon">
-          <IconEyeOpen size={28} color="var(--ch-attention)" />
-        </span>
-        <span className="tool-card-text">
-          <span className="tool-card-eyebrow">Auto-évaluation TDAH</span>
-          <span className="tool-card-title">Mes symptômes & leurs répercussions</span>
-          <span className="tool-card-sub">
-            68 questions, 8 à 12 minutes. À refaire idéalement tous les 3 mois pour suivre
-            l'évolution.
-          </span>
-        </span>
-        <span className="tool-card-arrow">→</span>
-      </Link>
+      <SectionLabel>Tous les outils</SectionLabel>
+      <Headline accent="à ma disposition">Les outils</Headline>
+
+      <div className="tools-grid">
+        {TOOLS.map((t) => (
+          <ToolCard key={t.href} tool={t} />
+        ))}
+      </div>
+
+      <p className="tools-coming">D'autres outils s'ajouteront ici progressivement.</p>
     </>
+  );
+}
+
+function ToolCard({ tool }: { tool: Tool }) {
+  const Mascot = tool.mascot;
+  const Icon = tool.icon;
+  return (
+    <Link href={tool.href} className="tool-grid-card" style={{ ["--accent" as string]: tool.color }}>
+      <div className="tool-grid-card-illu">
+        {Mascot && <Mascot color={tool.color} />}
+        {Icon && !Mascot && <Icon size={48} color={tool.color} />}
+      </div>
+      <div className="tool-grid-card-body">
+        <span className="tool-grid-card-eyebrow">{tool.eyebrow}</span>
+        <span className="tool-grid-card-title">{tool.title}</span>
+        <span className="tool-grid-card-sub">{tool.sub}</span>
+        <span className="tool-grid-card-meta">
+          <IconEye size={12} color="var(--ink-2)" /> {tool.duration}
+        </span>
+      </div>
+      <span className="tool-grid-card-arrow">→</span>
+    </Link>
   );
 }
