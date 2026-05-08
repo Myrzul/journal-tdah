@@ -2810,6 +2810,646 @@ label.flabel {
 }
 
 /* =================================================================
+   CHECKLIST — communs (boutons nav/primary)
+   ================================================================= */
+.checklist-nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.checklist-nav-btn {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  background: white;
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.checklist-primary-btn {
+  flex: 1;
+  padding: 14px 20px;
+  background: var(--ch-controle);
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.checklist-primary-btn.is-disabled,
+.checklist-primary-btn:disabled {
+  background: #e0dcd4;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+/* =================================================================
+   CHECKLIST — vue bibliothèque (vide + grille de cartes)
+   ================================================================= */
+.checklist-empty {
+  padding: 28px 24px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin: 8px 0 18px;
+  text-align: left;
+}
+.checklist-empty-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.checklist-empty-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 28px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 6px 0 10px;
+}
+.checklist-empty-sub {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+.checklist-empty-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 8px 0 14px;
+}
+@media (min-width: 720px) {
+  .checklist-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.checklist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 18px 14px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.checklist-card-head {
+  display: flex;
+  justify-content: space-between;
+}
+.checklist-card-title-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+}
+.checklist-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  word-break: break-word;
+}
+.checklist-card-edit {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.checklist-card-title-btn:hover .checklist-card-edit,
+.checklist-card-title-btn:focus-visible .checklist-card-edit {
+  color: var(--ink);
+}
+.checklist-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.checklist-card-meta-line {
+  font-family: var(--font-cond);
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+.checklist-card-meta-line b {
+  color: var(--ink);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  margin-right: 4px;
+}
+.checklist-card-recent-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0 4px;
+  border-top: 1.4px dashed var(--divider);
+}
+.checklist-card-recent-label {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.checklist-card-run {
+  margin-top: 4px;
+  padding: 12px 18px;
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.checklist-card-run:disabled {
+  background: #e0dcd4 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.checklist-grid-add {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.checklist-add-btn {
+  padding: 12px 18px;
+  background: transparent;
+  border: 2px dashed var(--ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.checklist-add-btn:hover,
+.checklist-add-btn:focus-visible {
+  background: color-mix(in oklab, var(--ch-controle) 14%, white);
+  outline: none;
+}
+
+/* =================================================================
+   CHECKLIST — suivi 7 derniers jours (pastilles)
+   ================================================================= */
+.checklist-recent {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+.checklist-recent-dot {
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 1;
+  max-width: 32px;
+  border: 1.6px solid var(--ink);
+  border-radius: 50%;
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-2);
+}
+.checklist-recent-dot.is-done {
+  color: var(--ink);
+}
+.checklist-recent-dot-letter {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* =================================================================
+   CHECKLIST — éditeur (étapes éditables, ↑↓✕)
+   ================================================================= */
+.checklist-edit-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.checklist-edit-step {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+.checklist-edit-step-num {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: center;
+}
+.checklist-edit-step-input {
+  margin: 0 !important;
+}
+.checklist-edit-step-actions {
+  display: flex;
+  gap: 4px;
+}
+.checklist-edit-step-btn {
+  width: 32px;
+  height: 32px;
+  background: white;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checklist-edit-step-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.checklist-edit-step-btn.is-danger:hover:not(:disabled),
+.checklist-edit-step-btn.is-danger:focus-visible:not(:disabled) {
+  background: color-mix(in oklab, var(--ch-motivation) 18%, white);
+  outline: none;
+}
+.checklist-edit-add-step {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px dashed var(--ink);
+  border-radius: 12px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+}
+.checklist-edit-add-step:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.checklist-editor-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+.checklist-run-now {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.checklist-run-now.is-disabled,
+.checklist-run-now:disabled {
+  background: #e0dcd4 !important;
+  color: var(--ink-2) !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.checklist-delete-btn {
+  margin-top: 4px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px solid var(--ch-motivation);
+  border-radius: 12px;
+  color: var(--ch-motivation);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.checklist-delete-btn:hover,
+.checklist-delete-btn:focus-visible {
+  background: color-mix(in oklab, var(--ch-motivation) 14%, white);
+  outline: none;
+}
+
+/* =================================================================
+   CHECKLIST — runner (exécution)
+   ================================================================= */
+.checklist-runner-head {
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 22px 22px 18px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.checklist-runner-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.checklist-runner-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 30px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  margin: 6px 0 8px;
+  word-break: break-word;
+}
+.checklist-runner-meta {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.checklist-runner-reward-pill {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: rgba(14, 14, 16, 0.8);
+  color: white;
+  border-radius: 999px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.checklist-runner-reward-pill-label {
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.checklist-runner-progress-track {
+  margin-top: 14px;
+  height: 10px;
+  background: rgba(14, 14, 16, 0.18);
+  border: 1.4px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.checklist-runner-progress-fill {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 999px;
+  transition: width 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.checklist-runner-progress-label {
+  margin-top: 4px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.checklist-runner-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.checklist-runner-step {
+  display: grid;
+  grid-template-columns: 32px 28px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 14px 14px;
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: inherit;
+  transition:
+    transform 120ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 120ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.checklist-runner-step:hover,
+.checklist-runner-step:focus-visible {
+  outline: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.checklist-runner-step.is-done {
+  background: color-mix(in oklab, var(--ch-controle) 12%, white);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.checklist-runner-step.is-done .checklist-runner-step-label {
+  text-decoration: line-through;
+  color: var(--ink-2);
+}
+.checklist-runner-step-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid var(--ink);
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.checklist-runner-step-num {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+.checklist-runner-step-label {
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.checklist-runner-attention {
+  padding: 14px 16px;
+  background: var(--paper);
+  border: 1.5px dashed var(--ink);
+  border-radius: 14px;
+  margin: 14px 0 4px;
+}
+.checklist-runner-attention-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+.checklist-runner-attention-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.checklist-quit-btn {
+  flex: 1;
+  padding: 12px 14px;
+  background: transparent;
+  color: var(--ink-2);
+  border: 1.5px dashed var(--ink-2);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* =================================================================
+   CHECKLIST — runner state "done"
+   ================================================================= */
+.checklist-runner-done {
+  padding: 28px 24px;
+  background: var(--ch-controle);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 18px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.checklist-runner-done-mascot {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: rgba(14, 14, 16, 0.85);
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+.checklist-runner-done-mascot svg {
+  width: 100%;
+  height: 100%;
+}
+.checklist-runner-done-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.checklist-runner-done-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 6vw, 36px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 8px 0 10px;
+  word-break: break-word;
+}
+.checklist-runner-done-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 auto 14px;
+  max-width: 460px;
+}
+.checklist-runner-reward {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-lg);
+  margin-bottom: 16px;
+  text-align: left;
+}
+.checklist-runner-reward-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 4px;
+}
+.checklist-runner-reward-text {
+  font-family: var(--font-hand);
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {

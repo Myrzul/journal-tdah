@@ -4,6 +4,7 @@ import { Headline, IntroHand, SectionLabel } from "@/components/journal/typograp
 import {
   MonsterCalme,
   MonsterCurieux,
+  MonsterEnergique,
   MonsterFier,
   MonsterReflexif,
 } from "@/components/monsters";
@@ -66,6 +67,15 @@ const TOOLS: Tool[] = [
     duration: "2 min + la tâche",
     color: "var(--ch-temps)",
     mascot: MonsterCalme,
+  },
+  {
+    href: "/outils/checklists",
+    eyebrow: "Routines & charge mentale",
+    title: "Mes checklists",
+    sub: "Externaliser l'ordre des tâches récurrentes. Étapes courtes, récompense à la fin.",
+    duration: "5 min de mise en place",
+    color: "var(--ch-controle)",
+    mascot: MonsterEnergique,
   },
 ];
 
