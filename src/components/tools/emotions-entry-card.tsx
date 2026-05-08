@@ -17,7 +17,7 @@ export function EmotionsEntryCard({
   onClick,
   mascot: Mascot,
   bubbleColor = "var(--ch-emotions)",
-  mascotColor = "#0E0E10",
+  mascotColor = "var(--paper)",
 }: Props) {
   return (
     <button type="button" onClick={onClick} className="emo-entry-card">
