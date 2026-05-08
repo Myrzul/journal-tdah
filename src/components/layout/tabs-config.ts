@@ -1,4 +1,5 @@
 import {
+  IconBook,
   IconCalendar,
   type IconComponent,
   IconList,
@@ -8,11 +9,12 @@ import {
 import {
   MonsterCalme,
   MonsterCurieux,
+  MonsterFier,
   MonsterReflexif,
   MonsterSurprise,
 } from "@/components/monsters";
 
-export type TabId = "aujourdhui" | "recap" | "outils" | "listes";
+export type TabId = "aujourdhui" | "recap" | "outils" | "listes" | "guide";
 
 export type TabConfig = {
   id: TabId;
@@ -60,6 +62,15 @@ export const TABS: readonly TabConfig[] = [
     sub: "Vider la tête. Respirer. La page se souvient.",
     icon: IconList,
     mascot: MonsterCalme,
+  },
+  {
+    id: "guide",
+    label: "Guide",
+    hex: "#B05BC9",
+    cssColor: "var(--ch-soin)",
+    sub: "Le guide en 10 rubriques, à ton rythme.",
+    icon: IconBook,
+    mascot: MonsterFier,
   },
 ] as const;
 

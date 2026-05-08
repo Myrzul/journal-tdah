@@ -5219,6 +5219,1002 @@ label.flabel {
 }
 
 /* =================================================================
+   GUIDE — sommaire (grille de rubriques)
+   ================================================================= */
+.guide-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 8px 0 16px;
+}
+@media (min-width: 720px) {
+  .guide-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.guide-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: inherit;
+  position: relative;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.guide-card:hover,
+.guide-card:focus-visible {
+  outline: none;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.guide-card.is-coming {
+  cursor: default;
+  opacity: 0.55;
+  background: var(--surface-alt);
+}
+.guide-card.is-coming:hover {
+  transform: none;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.guide-card-eyebrow {
+  grid-column: 1;
+  display: block;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rub-color);
+}
+.guide-card-title {
+  grid-column: 1;
+  display: block;
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin-top: 4px;
+}
+.guide-card-hook {
+  grid-column: 1;
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+.guide-card-progress {
+  grid-column: 1;
+  margin-top: 10px;
+}
+.guide-card-progress-track {
+  height: 6px;
+  background: var(--surface-alt);
+  border: 1.4px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.guide-card-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.guide-card-progress-label {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.guide-card-arrow {
+  grid-column: 2;
+  grid-row: 1 / span 4;
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--ink);
+}
+
+/* =================================================================
+   GUIDE — header de page rubrique (full-bleed coloré)
+   ================================================================= */
+.guide-rubrique-header {
+  margin: -16px -16px 14px;
+  padding: 28px 24px 32px;
+  color: white;
+  border-bottom: 2.4px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.guide-rubrique-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, white 1px, transparent 1.4px);
+  background-size: 14px 14px;
+}
+.guide-rubrique-header-umbrella {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+.guide-rubrique-header-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+  position: relative;
+}
+.guide-rubrique-header-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 6.5vw, 38px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 0 0 10px;
+  position: relative;
+}
+.guide-rubrique-header-hook {
+  font-family: var(--font-hand);
+  font-size: 18px;
+  line-height: 1.3;
+  text-align: center;
+  margin: 0;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+/* =================================================================
+   GUIDE — tabs des 5 sections
+   ================================================================= */
+.guide-section-tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--divider);
+  padding-bottom: 0;
+  overflow-x: auto;
+}
+.guide-section-tab {
+  flex: 1;
+  min-width: 70px;
+  padding: 10px 8px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.guide-section-tab:hover,
+.guide-section-tab:focus-visible {
+  outline: none;
+  color: var(--ink);
+}
+.guide-section-tab.is-on {
+  color: var(--ink);
+  border-bottom-color: var(--rub-color);
+  font-weight: 800;
+}
+.guide-section-tab-dot {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1;
+}
+.guide-section-tab.is-read .guide-section-tab-dot {
+  color: var(--rub-color);
+}
+.guide-section-tab-label {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+/* =================================================================
+   GUIDE — typographie commune
+   ================================================================= */
+.guide-paragraph {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.guide-paragraph-arrow {
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.guide-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+}
+.guide-bullets > li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.guide-bullets > li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: var(--rub-color, var(--ink));
+}
+.guide-bullets-arrow > li::before {
+  content: "→";
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 13px;
+}
+.guide-sub-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0 12px;
+}
+.guide-sub-bullets > li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 4px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.guide-sub-bullets > li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ink-2);
+}
+
+/* =================================================================
+   GUIDE — blocks de contenu (signes, répercussions, objectifs)
+   ================================================================= */
+.guide-block {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1.8px solid var(--ink);
+  border-radius: var(--r-lg);
+  margin: 0 0 16px;
+}
+.guide-block-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rub-color, var(--ink));
+  margin-bottom: 8px;
+}
+.guide-block-lead {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.guide-block-signes {
+  background: color-mix(in oklab, var(--rub-color) 6%, white);
+}
+.guide-block-objectifs {
+  background: color-mix(in oklab, var(--rub-color) 6%, white);
+}
+.guide-block-repercussions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--surface);
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  border: 1.4px solid var(--divider);
+  margin: 0 0 16px;
+}
+.guide-sphere {
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--divider);
+}
+.guide-sphere:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.guide-sphere-title {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+/* =================================================================
+   GUIDE — note personnelle (zone d'écriture pour bulle manuscrite)
+   ================================================================= */
+.guide-note {
+  margin: 16px 0;
+  padding: 16px 18px;
+  background: color-mix(in oklab, var(--rub-color) 8%, white);
+  border: 2px dashed var(--ink);
+  border-radius: var(--r-lg);
+}
+.guide-note-question {
+  font-family: var(--font-hand);
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.guide-note-hint {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  margin: 0 0 10px;
+}
+.guide-note-area {
+  width: 100%;
+  min-height: 90px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+  resize: vertical;
+}
+.guide-note-area:focus {
+  outline: 2px solid var(--rub-color);
+  outline-offset: 2px;
+}
+.guide-note-saved {
+  margin-top: 6px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* =================================================================
+   GUIDE — outils (bouton lien + statique)
+   ================================================================= */
+.guide-tools-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+.guide-tool-static {
+  padding: 12px 16px;
+  background: var(--paper);
+  border: 1.4px solid var(--divider);
+  border-radius: var(--r-md);
+}
+.guide-tool-static-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.guide-tool-static-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.4px solid var(--ink);
+}
+.guide-tool-static-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin: 4px 0 4px 16px;
+}
+.guide-tool-static-arrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.45;
+  margin: 0 0 0 16px;
+}
+
+.guide-tool-link {
+  display: grid;
+  grid-template-columns: 56px 1fr 24px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: color-mix(in oklab, var(--rub-color) 10%, white);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-lg);
+  box-shadow: 3px 3px 0 var(--ink);
+  text-decoration: none;
+  color: var(--ink);
+  font-family: inherit;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.guide-tool-link:hover,
+.guide-tool-link:focus-visible {
+  outline: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.guide-tool-link-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.guide-tool-link-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.guide-tool-link-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.guide-tool-link-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.guide-tool-link-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+.guide-tool-link-status {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rub-color);
+  margin-top: 4px;
+}
+.guide-tool-link-arrow {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--ink);
+}
+
+/* =================================================================
+   GUIDE — story (témoignage)
+   ================================================================= */
+.guide-story {
+  padding: 22px 24px;
+  background: color-mix(in oklab, var(--rub-color) 8%, white);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin: 0 0 18px;
+}
+.guide-story p {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.guide-story p:last-child {
+  margin-bottom: 0;
+}
+
+/* =================================================================
+   GUIDE — phases (cards)
+   ================================================================= */
+.guide-phase-card {
+  margin: 0 0 16px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.guide-phase-card-head {
+  margin: -4px 0 14px;
+}
+.guide-phase-card-num {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--rub-color);
+  color: white;
+  border-radius: 999px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.guide-phase-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 4.5vw, 24px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 8px 0 4px;
+}
+.guide-phase-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.guide-phase-h {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 14px 0 6px;
+}
+.guide-phase-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-2);
+  margin: 0 0 10px;
+}
+.guide-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.guide-check {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: white;
+  color: var(--ink);
+  border: 1.6px solid var(--ink);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 160ms ease;
+}
+.guide-check:hover,
+.guide-check:focus-visible {
+  outline: none;
+  background: color-mix(in oklab, var(--rub-color) 8%, white);
+}
+.guide-check.is-on {
+  background: color-mix(in oklab, var(--rub-color) 14%, white);
+}
+.guide-check.is-on .guide-check-label {
+  text-decoration: line-through;
+  color: var(--ink-2);
+}
+.guide-check-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--ink);
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.guide-check.is-on .guide-check-box {
+  background: var(--rub-color);
+  color: white;
+}
+.guide-check-label {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.guide-sub-text {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 4px 0;
+}
+.guide-sub-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  background: color-mix(in oklab, var(--rub-color) 14%, white);
+  border: 1.4px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* =================================================================
+   GUIDE — callouts (encarts)
+   ================================================================= */
+.guide-callout {
+  padding: 16px 18px;
+  background: var(--paper);
+  border: 1.4px dashed var(--ink);
+  border-radius: var(--r-md);
+  margin: 12px 0;
+}
+.guide-callout-eyebrow {
+  display: block;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+.guide-callout-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+.guide-callout-automatise {
+  background: var(--ch-motivation);
+  color: white;
+  border: 2.4px solid var(--ink);
+  border-style: solid;
+  border-radius: var(--r-xl);
+  text-align: center;
+  padding: 18px 20px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.guide-automatise-eyebrow {
+  font-family: var(--font-display);
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.guide-automatise-equals {
+  font-family: var(--font-display);
+  font-size: 26px;
+  margin: 4px 0;
+}
+.guide-automatise-line {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 2px 0;
+  opacity: 0.95;
+}
+.guide-automatise-num {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 7vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 6px 0;
+}
+.guide-automatise-foot {
+  margin-top: 12px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  line-height: 1.45;
+  font-style: italic;
+  opacity: 0.92;
+}
+
+/* =================================================================
+   GUIDE — éditeur SMART
+   ================================================================= */
+.guide-smart {
+  margin: 8px 0 12px;
+}
+.guide-smart-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+@media (min-width: 640px) {
+  .guide-smart-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.guide-smart-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.guide-smart-label {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.guide-smart-label b {
+  color: var(--rub-color);
+  font-weight: 800;
+  margin-right: 1px;
+}
+.guide-smart-hint {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: var(--ink-2);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+.guide-smart-formulated {
+  margin-bottom: 12px;
+}
+.guide-smart-formulated-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.guide-smart-formulated-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rub-color);
+}
+.guide-smart-toggle {
+  background: transparent;
+  border: none;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.guide-smart-add {
+  width: 100%;
+  padding: 12px 18px;
+  background: var(--rub-color);
+  color: white;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.guide-smart-add.is-disabled,
+.guide-smart-add:disabled {
+  background: #e0dcd4;
+  color: var(--ink-2);
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.guide-smart-list {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: var(--surface-alt);
+  border: 1.4px solid var(--divider);
+  border-radius: var(--r-md);
+}
+.guide-smart-list-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+.guide-smart-item {
+  padding: 10px 12px;
+  background: white;
+  border: 1.4px solid var(--divider);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.guide-smart-item:last-child {
+  margin-bottom: 0;
+}
+.guide-smart-item-text {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.guide-smart-item-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.guide-smart-item-del {
+  background: transparent;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  color: var(--ink-2);
+  cursor: pointer;
+  padding: 2px 8px;
+  font-size: 11px;
+}
+.guide-smart-item-del:hover,
+.guide-smart-item-del:focus-visible {
+  outline: none;
+  border-color: var(--ch-motivation);
+  color: var(--ch-motivation);
+}
+
+/* =================================================================
+   GUIDE — bouton "marquer comme lu"
+   ================================================================= */
+.guide-mark-read {
+  width: 100%;
+  margin: 18px 0 12px;
+  padding: 14px 18px;
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition:
+    background 160ms ease,
+    transform 120ms,
+    box-shadow 120ms;
+}
+.guide-mark-read:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.guide-mark-read.is-read {
+  background: color-mix(in oklab, var(--rub-color) 14%, white);
+  color: var(--ink);
+}
+.guide-mark-read-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--ink);
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--ink);
+}
+.guide-mark-read.is-read .guide-mark-read-box {
+  background: var(--rub-color);
+  color: white;
+}
+
+/* =================================================================
+   GUIDE — bloc "À retenir"
+   ================================================================= */
+.guide-retenir {
+  padding: 22px 24px;
+  background: color-mix(in oklab, var(--rub-color) 8%, white);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin: 0 0 16px;
+}
+.guide-retenir-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rub-color);
+  margin-bottom: 12px;
+}
+.guide-retenir-h {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 14px 0 8px;
+}
+.guide-retenir-h:first-of-type {
+  margin-top: 0;
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {
