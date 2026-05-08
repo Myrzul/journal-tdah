@@ -5335,12 +5335,18 @@ label.flabel {
    GUIDE — header de page rubrique (full-bleed coloré)
    ================================================================= */
 .guide-rubrique-header {
-  margin: -16px -16px 14px;
-  padding: 28px 24px 32px;
+  /* Annule le padding du .page parent pour coller au bord supérieur et latéral. */
+  margin: -48px -16px 14px;
+  padding: calc(28px + env(safe-area-inset-top)) 24px 32px;
   color: white;
   border-bottom: 2.4px solid var(--ink);
   position: relative;
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  .guide-rubrique-header {
+    margin: -56px -32px 14px;
+  }
 }
 .guide-rubrique-header::before {
   content: "";
