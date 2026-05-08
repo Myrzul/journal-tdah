@@ -96,6 +96,15 @@ const TOOLS: Tool[] = [
     color: "var(--ch-environnement)",
     mascot: MonsterSurprise,
   },
+  {
+    href: "/outils/travail",
+    eyebrow: "Adapter mon environnement pro",
+    title: "Focus travail",
+    sub: "Identifier mes besoins et préparer un plan d'aménagement — pour moi ou à partager (formulation neutre possible).",
+    duration: "10-20 min de réflexion",
+    color: "var(--ch-attention)",
+    mascot: MonsterReflexif,
+  },
 ];
 
 export default function OutilsPage() {

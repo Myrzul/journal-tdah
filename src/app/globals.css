@@ -4370,6 +4370,358 @@ label.flabel {
 }
 
 /* =================================================================
+   FOCUS TRAVAIL (work) — communs
+   ================================================================= */
+.work-nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.work-nav-btn {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  background: white;
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.work-primary-btn {
+  flex: 1;
+  padding: 14px 20px;
+  background: var(--ch-attention);
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.work-primary-btn.is-disabled,
+.work-primary-btn:disabled {
+  background: #e0dcd4 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.work-summary-btn {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--ink);
+  color: white;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.work-summary-btn.is-disabled,
+.work-summary-btn:disabled {
+  background: #e0dcd4 !important;
+  color: var(--ink-2) !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.work-delete-btn {
+  margin-top: 4px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px solid var(--ch-motivation);
+  border-radius: 12px;
+  color: var(--ch-motivation);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* =================================================================
+   WORK — bibliothèque
+   ================================================================= */
+.work-empty {
+  padding: 28px 24px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin: 8px 0 18px;
+}
+.work-empty-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.work-empty-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 26px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 6px 0 4px;
+}
+.work-empty-sub {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 8px 0 14px;
+}
+@media (min-width: 720px) {
+  .work-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.work-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.work-card:hover,
+.work-card:focus-visible {
+  outline: none;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.work-card-eyebrow {
+  grid-column: 1;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.work-card-title {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.work-card-meta {
+  grid-column: 1;
+  font-family: var(--font-cond);
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+.work-card-arrow {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--ink);
+  align-self: center;
+}
+.work-grid-add {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.work-add-btn {
+  padding: 12px 18px;
+  background: transparent;
+  border: 2px dashed var(--ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.work-add-btn:hover,
+.work-add-btn:focus-visible {
+  background: color-mix(in oklab, var(--ch-attention) 14%, white);
+  outline: none;
+}
+
+/* =================================================================
+   WORK — éditeur (chips à cocher)
+   ================================================================= */
+.work-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 6px 0 12px;
+}
+.work-chip {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  background: white;
+  color: var(--ink);
+  border: 1.8px solid var(--ink);
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: inherit;
+  transition:
+    transform 120ms,
+    box-shadow 120ms;
+}
+.work-chip:hover,
+.work-chip:focus-visible {
+  outline: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.work-chip.is-on {
+  background: color-mix(in oklab, var(--ch-attention) 14%, white);
+}
+.work-chip-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--ink);
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.work-chip.is-on .work-chip-box {
+  background: var(--ch-attention);
+}
+.work-chip-label {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.work-editor-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* =================================================================
+   WORK — synthèse (export presse-papier)
+   ================================================================= */
+.work-summary-card {
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 24px 22px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.work-summary-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.work-summary-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5.5vw, 34px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 8px 0 10px;
+}
+.work-summary-text {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 460px;
+}
+
+.work-summary-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.work-summary-tab {
+  flex: 1;
+  padding: 10px 14px;
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.work-summary-tab.is-on {
+  background: var(--ch-attention);
+  color: var(--ink);
+}
+
+.work-summary-pre {
+  background: var(--paper);
+  border: 1.8px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: 18px 18px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 12px;
+  max-height: 460px;
+  overflow: auto;
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {
