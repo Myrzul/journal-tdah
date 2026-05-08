@@ -3760,6 +3760,616 @@ label.flabel {
 }
 
 /* =================================================================
+   BAG (sacs matériels) — communs
+   ================================================================= */
+.bag-nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.bag-nav-btn {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  background: white;
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.bag-primary-btn {
+  flex: 1;
+  padding: 14px 20px;
+  background: var(--ch-environnement);
+  color: var(--ink);
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.bag-primary-btn.is-disabled,
+.bag-primary-btn:disabled {
+  background: #e0dcd4 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.bag-quit-btn {
+  flex: 1;
+  padding: 12px 14px;
+  background: transparent;
+  color: var(--ink-2);
+  border: 1.5px dashed var(--ink-2);
+  border-radius: 14px;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* =================================================================
+   BAG — bibliothèque
+   ================================================================= */
+.bag-empty {
+  padding: 28px 24px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  box-shadow: 4px 4px 0 var(--ink);
+  margin: 8px 0 18px;
+}
+.bag-empty-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.bag-empty-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 28px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 6px 0 10px;
+}
+.bag-empty-sub {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+.bag-empty-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bag-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 8px 0 14px;
+}
+@media (min-width: 720px) {
+  .bag-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.bag-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 18px 14px;
+  background: var(--surface);
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.bag-card-title-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+}
+.bag-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  word-break: break-word;
+}
+.bag-card-edit {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.bag-card-desc {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.bag-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0 0;
+  border-top: 1.4px dashed var(--divider);
+}
+.bag-card-meta-line {
+  font-family: var(--font-cond);
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+.bag-card-meta-line b {
+  color: var(--ink);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  margin-right: 4px;
+}
+.bag-card-prep {
+  margin-top: 4px;
+  padding: 12px 18px;
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bag-card-prep:disabled {
+  background: #e0dcd4 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.bag-grid-add {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.bag-add-btn {
+  padding: 10px 16px;
+  background: transparent;
+  border: 2px dashed var(--ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+.bag-add-btn:hover,
+.bag-add-btn:focus-visible {
+  background: color-mix(in oklab, var(--ch-environnement) 18%, white);
+  outline: none;
+}
+
+/* =================================================================
+   BAG — éditeur (catégories + items + final + tips)
+   ================================================================= */
+.bag-edit-items {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bag-edit-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+.bag-edit-item-input {
+  margin: 0 !important;
+}
+.bag-edit-item-btn {
+  width: 32px;
+  height: 32px;
+  background: white;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bag-edit-item-btn.is-danger:hover,
+.bag-edit-item-btn.is-danger:focus-visible {
+  background: color-mix(in oklab, var(--ch-motivation) 18%, white);
+  outline: none;
+}
+.bag-edit-add-item {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px dashed var(--ink);
+  border-radius: 12px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+}
+.bag-edit-remove-cat {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--ch-motivation);
+  border-radius: 10px;
+  color: var(--ch-motivation);
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.bag-edit-add-cat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1.5px dashed var(--ink);
+  border-radius: 14px;
+}
+.bag-edit-add-cat-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-right: 4px;
+}
+.bag-edit-add-cat-btn {
+  padding: 8px 12px;
+  background: white;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.bag-edit-add-cat-btn:hover,
+.bag-edit-add-cat-btn:focus-visible {
+  background: color-mix(in oklab, var(--ch-environnement) 18%, white);
+  outline: none;
+}
+
+.bag-editor-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+.bag-prep-now {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--ink);
+  color: white;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bag-prep-now.is-disabled,
+.bag-prep-now:disabled {
+  background: #e0dcd4 !important;
+  color: var(--ink-2) !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+.bag-delete-btn {
+  margin-top: 4px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px solid var(--ch-motivation);
+  border-radius: 12px;
+  color: var(--ch-motivation);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* =================================================================
+   BAG — runner (préparation)
+   ================================================================= */
+.bag-runner-head {
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-2xl);
+  padding: 22px 22px 18px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.bag-runner-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.bag-runner-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.5vw, 30px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  margin: 6px 0 4px;
+  word-break: break-word;
+}
+.bag-runner-desc {
+  font-size: 13px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+.bag-runner-progress-track {
+  margin-top: 10px;
+  height: 10px;
+  background: rgba(14, 14, 16, 0.18);
+  border: 1.4px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bag-runner-progress-fill {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 999px;
+  transition: width 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.bag-runner-progress-label {
+  margin-top: 4px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bag-runner-cat {
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  background: white;
+  border: 1.8px solid var(--ink);
+  border-radius: var(--r-lg);
+  transition: opacity 240ms ease;
+}
+.bag-runner-cat.is-complete {
+  opacity: 0.65;
+}
+.bag-runner-cat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.bag-runner-cat-label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.bag-runner-cat-count {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+}
+
+.bag-runner-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bag-runner-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: white;
+  color: var(--ink);
+  border: 1.6px solid var(--ink);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    transform 120ms,
+    box-shadow 120ms;
+}
+.bag-runner-item:hover,
+.bag-runner-item:focus-visible {
+  outline: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.bag-runner-item:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.bag-runner-item.is-done {
+  background: color-mix(in oklab, var(--ch-environnement) 18%, white);
+}
+.bag-runner-item.is-done .bag-runner-item-label {
+  text-decoration: line-through;
+  color: var(--ink-2);
+}
+.bag-runner-item-box {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 2px solid var(--ink);
+  background: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.bag-runner-item-label {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.bag-runner-final {
+  margin: 18px 0 8px;
+  padding: 16px 18px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-xl);
+  transition: opacity 240ms ease;
+}
+.bag-runner-final.is-active {
+  background: color-mix(in oklab, var(--ch-environnement) 14%, white);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.bag-runner-final.is-pending {
+  background: var(--surface-alt);
+  opacity: 0.7;
+}
+.bag-runner-final-eyebrow {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.bag-runner-final-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 4px 0 10px;
+}
+
+.bag-runner-tips {
+  margin: 14px 0;
+  padding: 14px 16px;
+  background: var(--paper);
+  border: 1.5px dashed var(--ink);
+  border-radius: 14px;
+}
+.bag-runner-tips-label {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+.bag-runner-tips-text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.bag-runner-done-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 18px 24px;
+  border: 2.4px solid var(--ink);
+  border-radius: var(--r-xl);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition:
+    transform 120ms,
+    box-shadow 120ms;
+}
+.bag-runner-done-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.bag-runner-done-btn.is-disabled,
+.bag-runner-done-btn:disabled {
+  background: #e0dcd4 !important;
+  color: var(--ink-2) !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* =================================================================
    ÉVAL TDAH — carte de suggestion sur le hub
    ================================================================= */
 .eval-hub-nudge {

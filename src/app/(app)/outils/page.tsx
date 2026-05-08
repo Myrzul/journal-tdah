@@ -7,6 +7,7 @@ import {
   MonsterEnergique,
   MonsterFier,
   MonsterReflexif,
+  MonsterSurprise,
 } from "@/components/monsters";
 
 type Tool = {
@@ -85,6 +86,15 @@ const TOOLS: Tool[] = [
     duration: "5 min de mise en place",
     color: "var(--ch-controle)",
     mascot: MonsterEnergique,
+  },
+  {
+    href: "/outils/sacs",
+    eyebrow: "Préparation matérielle",
+    title: "Mes sacs",
+    sub: "Externaliser le contenu des sacs récurrents — sport, week-end, école. Catégories + vérification finale.",
+    duration: "5 min de prépa",
+    color: "var(--ch-environnement)",
+    mascot: MonsterSurprise,
   },
 ];
 
