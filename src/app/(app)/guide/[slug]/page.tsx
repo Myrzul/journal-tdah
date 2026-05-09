@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Rubrique01Page } from "@/components/guide/rubrique-01-page";
 import { Rubrique02Page } from "@/components/guide/rubrique-02-page";
+import { Rubrique03Page } from "@/components/guide/rubrique-03-page";
 import { RUBRIQUE_BY_SLUG } from "@/lib/guide/rubriques-meta";
 
 type Params = { slug: string };
@@ -19,6 +20,9 @@ export default async function GuideRubriquePage({
   }
   if (rubrique.id === "02") {
     return <Rubrique02Page rubrique={rubrique} />;
+  }
+  if (rubrique.id === "03") {
+    return <Rubrique03Page rubrique={rubrique} />;
   }
 
   if (!rubrique.available) {
