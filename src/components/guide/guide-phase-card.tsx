@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 
 type Props = {
-  num: 1 | 2 | 3 | 4;
+  num: 1 | 2 | 3 | 4 | 5;
   title: string;
   rubColor: string;
   children: ReactNode;
