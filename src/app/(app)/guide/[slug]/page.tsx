@@ -5,6 +5,7 @@ import { Rubrique03Page } from "@/components/guide/rubrique-03-page";
 import { Rubrique04Page } from "@/components/guide/rubrique-04-page";
 import { Rubrique05Page } from "@/components/guide/rubrique-05-page";
 import { Rubrique06Page } from "@/components/guide/rubrique-06-page";
+import { Rubrique07Page } from "@/components/guide/rubrique-07-page";
 import { RUBRIQUE_BY_SLUG } from "@/lib/guide/rubriques-meta";
 
 type Params = { slug: string };
@@ -35,6 +36,9 @@ export default async function GuideRubriquePage({
   }
   if (rubrique.id === "06") {
     return <Rubrique06Page rubrique={rubrique} />;
+  }
+  if (rubrique.id === "07") {
+    return <Rubrique07Page rubrique={rubrique} />;
   }
 
   if (!rubrique.available) {
