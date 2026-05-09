@@ -96,10 +96,10 @@ export const RUBRIQUES: RubriqueMeta[] = [
     slug: "10-controle",
     eyebrow: "Rubrique 10",
     title: "Reprendre le contrôle",
-    hook: "Synthèse — incarner durablement ce qui a marché.",
+    hook: "Composer avec son fonctionnement, pas contre lui.",
     cssColor: "var(--ch-controle)",
     hex: "#1FBF7A",
-    available: false,
+    available: true,
   },
 ];
 
